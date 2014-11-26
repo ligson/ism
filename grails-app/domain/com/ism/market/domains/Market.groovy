@@ -1,5 +1,6 @@
 package com.ism.market.domains
 
+import com.ism.address.domains.City
 import com.ism.goods.domains.Goods
 
 /***
@@ -8,7 +9,7 @@ import com.ism.goods.domains.Goods
 class Market {
 
     static hasMany = [goodses:Goods]
-
+    City city;
     static constraints = {
     }
 }
