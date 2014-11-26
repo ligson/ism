@@ -25,7 +25,17 @@ class User {
     }
     //字段跟数据库的关联
     static mapping = {
+        name(column:"user_name")
+        passowrd(column:"user_password")
+        cellphone(column:"user_cellphone")
+        email(column:"user_column")
+        sex(column:"user_sex")
+        photo(column:"user_photo")
+        birth(column:"user_birth")
+        registerDate(column:"user_registerDate")
+        lastLoginDate(column:"user_lastLoginDate")
         state(column:"user_state")
+        
         table("ism_user")
     }
 }
