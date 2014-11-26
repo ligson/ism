@@ -7,7 +7,6 @@
         <parser content-type="text/html;charset=UTF-8"
             class="org.codehaus.groovy.grails.web.sitemesh.GrailsHTMLPageParser" />
     </page-parsers>
-aa
     <decorator-mappers>
         <mapper class="org.codehaus.groovy.grails.web.sitemesh.GrailsLayoutDecoratorMapper" />
     </decorator-mappers>
