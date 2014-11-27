@@ -14,4 +14,7 @@ class Order {
     double price;//订单总价
     static constraints = {
     }
+    static mapping = {
+        table("ism_order")
+    }
 }
