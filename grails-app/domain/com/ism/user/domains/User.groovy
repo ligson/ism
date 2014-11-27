@@ -4,7 +4,7 @@ package com.ism.user.domains
  * 用户类
  */
 class User {
-    String name;
+    String nickName;
     String password;
     String cellphone;
     String email;
@@ -16,10 +16,10 @@ class User {
     int state = 1;
     //字段的逻辑约束
     static constraints = {
-        name(nullable: true, maxSize: 255, unique: true)
+        nickName(nullable:true)
         password(nullable: false, maxSize: 255)
-        cellphone(nullable: true, maxSize: 32)
-        email(nullable: true, email: true)
+        cellphone(nullable: true, maxSize: 32,unique:true)
+        email(nullable: true, email: true,unique:true)
         photo(nullable: true, maxSize: 255)
         birth(nullable: true, maxSize: 255)
     }
