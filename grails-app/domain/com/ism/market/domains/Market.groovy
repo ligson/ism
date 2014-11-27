@@ -1,6 +1,7 @@
 package com.ism.market.domains
 
 import com.ism.address.domains.City
+import com.ism.goods.domains.Category
 import com.ism.goods.domains.Goods
 
 /***
@@ -8,8 +9,10 @@ import com.ism.goods.domains.Goods
  */
 class Market {
 
-    static hasMany = [goodses:Goods]
+    static hasMany = [goodses:Goods,categories:Category]
     City city;
+    Category rootCategory;
     static constraints = {
+        rootCategory(nullable:true)
     }
 }

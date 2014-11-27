@@ -21,7 +21,7 @@ class UserService implements IUserService {
                 //查询语句动态生成
                 user = User.findByEmailAndPassword(params.name, (params.password + "").encodeAsSHA1())
             } else {
-                user = User.findByCellphoneAndEmail(params.name, (params.password + "").encodeAsSHA1())
+                user = User.findByCellphoneAndPassword(params.name, (params.password + "").encodeAsSHA1())
             }
             if (user) {
                 result.success = true;
@@ -64,5 +64,20 @@ class UserService implements IUserService {
         }
 
         return result
+    }
+
+    public void initSuper(){
+        User superAdmin = User.findByRole(0);
+        if(!superAdmin){
+            superAdmin = new User();
+            log.info("超级管理员不存在！初始化超级管理员!")
+            superAdmin.cellphone = "1383838521";
+            superAdmin.email = "admin@admin.com";
+            superAdmin.nickName = "超级管理员";
+            superAdmin.password = "password".encodeAsSHA1();
+            superAdmin.state = 1;
+            superAdmin.save(flush:true);
+            log.info("超级管理员初始化成功！手机：1383838521，email：admin@admin.com,密码:password")
+        }
     }
 }
