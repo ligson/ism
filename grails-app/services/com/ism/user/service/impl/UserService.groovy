@@ -67,7 +67,7 @@ class UserService implements IUserService {
     }
 
     public void initSuper(){
-        User superAdmin = User.findByRole(0);
+        User superAdmin = User.findByRole(0)
         if(!superAdmin){
             superAdmin = new User();
             log.info("超级管理员不存在！初始化超级管理员!")
@@ -76,6 +76,7 @@ class UserService implements IUserService {
             superAdmin.nickName = "超级管理员";
             superAdmin.password = "password".encodeAsSHA1();
             superAdmin.state = 1;
+            superAdmin.role = 0;
             superAdmin.save(flush:true);
             log.info("超级管理员初始化成功！手机：1383838521，email：admin@admin.com,密码:password")
         }
