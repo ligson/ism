@@ -41,4 +41,7 @@ class AdminController {
       jsonMap.put("rows", list);//rows键 存放每页记录 list
       return render(view:'user',model:[result:jsonMap]);
   }
+    def welcome(){
+        return render(view:'welcome')
+    }
 }
