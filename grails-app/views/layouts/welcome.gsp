@@ -8,10 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title></title>
+    <title>欢迎页面</title>
 </head>
 
 <body>
-goodsMgr
+欢迎访问。。。。。。
 </body>
 </html>
