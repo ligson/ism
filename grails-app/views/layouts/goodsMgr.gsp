@@ -13,6 +13,7 @@
     <r:layoutResources/>
     <r:layoutResources/>
     <link type="text/css" rel="stylesheet" href="${resource(dir: 'css/admin', file: 'adminBase.css')}"/>
+
     <g:layoutHead/>
 </head>
 
@@ -61,10 +62,9 @@
     版权归XXXXX所有
 </div>
 
-<div data-options="region:'east',split:true" title="East" style="width:150px;"></div>
 
 <div data-options="region:'west',split:false" title="商品管理" style="width:150px;">
-    <div class="easyui-accordion" style="width:148px;height:300px;">
+    <div class="easyui-accordion" style="width:148px;height:100%;">
         <div title="商品管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
             <ul class="easyui-tree">
                 <li>
@@ -95,7 +95,7 @@
                         </li>
                         <li>家电</li>
                         <li>小商品</li>
-                        <li>welcome.html</li>
+                        <li><a href= "${resource(dir: 'js/lib/jquery-easyui-1.4.1/demo/form', file: 'basic.html')}">欢迎</a></li>
                     </ul>
                 </li>
             </ul>
@@ -107,7 +107,8 @@
 
 </div>
 
-<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+<div data-options="region:'center',title:'主页面',iconCls:'icon-ok'">
+    fdsfsa
     <g:layoutBody/>
 </div>
 </body>
