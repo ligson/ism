@@ -14,7 +14,6 @@ class GoodService implements IGoodService {
      * @param params
      * @return
      */
-    @Override
     Map add(Map params) {
         def result = [:];
         String gdId=params.gdId;
