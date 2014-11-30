@@ -17,6 +17,14 @@
 <link type="text/css" rel="stylesheet" href="${resource(dir: 'css/admin', file: 'adminBase.css')}"/>
 
 <%-- <g:layoutHead/>--%>
+    <script>
+    function onClick(){
+        alert($("#mainDiv").acceptData);
+        $("#mainFrame").attr("controller","admin");
+        $("#mainFrame").attr("action","list");
+    }
+
+    </script>
 </head>
 
 <body class="easyui-layout">
@@ -59,9 +67,13 @@
 </div>
 
 
-<div data-options="region:'west',split:false" title="商品管理" style="width:150px;">
+<div data-options="region:'west',split:false" title="导航菜单" style="width:150px;">
 <div class="easyui-accordion" style="width:148px;height:100%;">
-<div title="商品管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+    <div title="超市管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+        <ul><li><a href="javascript:onClick()">超市管理</a></li></ul>
+    </div>
+
+    <div title="商品管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
     <ul class="easyui-tree">
         <li>
             <span>商品分类</span>
@@ -96,15 +108,14 @@
         </li>
     </ul>
 </div>
-<div title="超市管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;"></div>
-<div title="About" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;"></div>
+<div title="系统管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;"></div>
 <div title="About" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;"></div>
 </div>
 
 </div>
 
-<div data-options="region:'center',title:'主页面',iconCls:'icon-ok'">
-<g:include controller="layouts" action="welcome"></g:include>
+<div data-options="region:'center',title:'主页面',iconCls:'icon-ok'" id="mainDiv">
+<g:include controller="layouts" action="welcome" id="mainFrame"></g:include>
 <%--<g:layoutBody/>--%>
 </div>
 </body>
