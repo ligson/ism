@@ -145,7 +145,7 @@
     function newuser() {
         $("#dlg").dialog("open").dialog('setTitle', '新增用户'); ;
         $("#fm").form("clear");
-        url = "add";
+        url = "save";
         $("#hidtype").val("submit");
     }
     function edituser() {

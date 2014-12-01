@@ -32,15 +32,20 @@ class UserMgrController {
     /**
      * 新增用户
      */
-    def add(){
-        User user=new User();
-        user.setEmail(params.email);
-        user.setNickName(params.nickName);
-        user.setBirth(params.birth);
-        user.setCellphone(params.cellphone);
-        user.setRegisterDate(params.CreateTime);
-        String result=user.save();
-        System.out.println(result)
-        render(contentType: "text/json"){return result}
+    def create  =  {
+        def user  =   new  User();
+        user.properties  =  params;
+        return  [ ' user ' :user];
     }
+    def save  =  {
+        def user  =   new  User();
+        user.properties  =  params;
+        if (user.save()) {
+            render(view: "index");
+        }
+        else  {
+            render(view: ' create ' ,model:[user:user]);
+        }
+    }
+
 }
