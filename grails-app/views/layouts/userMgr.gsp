@@ -1,14 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2014/11/27 0027
-  Time: 13:01
+  Date: 2014/12/2 0002
+  Time: 22:05
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title><g:layoutTitle/>-商品管理</title>
+    <title><g:layoutTitle/>-用户管理</title>
     <g:include view="layouts/adminCommonHead.gsp"/>
     <g:layoutHead/>
 </head>
@@ -17,8 +17,8 @@
 <g:include view="layouts/adminCommonBody.gsp"/>
 <div data-options="region:'west',split:false" title="导航菜单" style="width:150px;">
     <div class="easyui-accordion" style="width:148px;height:100%;">
-        <div title="超市管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
-            <ul><li><a href="${createLink(controller:'goodsMgr',action:'marketList')}">超市管理</a></li></ul>
+        <div title="用户管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+            <ul><li><a href="${createLink(controller:'userMgr',action:'index')}">用户列表</a></li></ul>
         </div>
 
         <div title="商品管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">

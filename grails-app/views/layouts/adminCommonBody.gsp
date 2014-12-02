@@ -15,13 +15,11 @@
 
             <div class="ism_nav col-md-8">
                 <div class="ism_nav_item">
-                    <a class="btn btn-default btn-block" href="#">超市管理</a></div>
+                <a class="btn btn-default btn-block" href="${createLink(controller:'goodsMgr',action:'marketList')}">商品管理</a></div>
                 <div class="ism_nav_item">
-                    <a class="btn btn-default btn-block" href="#">商品管理</a></div>
+                    <a class="btn btn-default btn-block" href="${createLink(controller:'userMgr',action:'index')}">用户管理</a></div>
                 <div class="ism_nav_item">
-                    <a class="btn btn-default btn-block" href="#">系统管理</a></div>
-                <div class="ism_nav_item">
-                    <a class="btn btn-default btn-block" href="#">商品管理</a></div>
+                    <a class="btn btn-default btn-block" href="${createLink(controller:'systemMgr',action:'index')}">系统管理</a></div>
             </div>
 
 

@@ -11,7 +11,7 @@ class AdminController {
         return redirect(action:'login')
     }
     def login(){
-        if(params.size()==2){
+        if(request.method.equalsIgnoreCase("get")){
             return render(view:'login');
         }else{
             def result = userService.login(params);

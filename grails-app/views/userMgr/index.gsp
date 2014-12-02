@@ -3,10 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>用户管理</title>
-    <r:require modules="jquery,jquery-easyui"/>
-    <r:layoutResources/>
-    <r:layoutResources/>
-    <link type="text/css" rel="stylesheet" href="${resource(dir: 'js/lib/jquery-easyui-1.4.1/demo/', file: 'demo.css')}"/>
 </head>
 <body>
 

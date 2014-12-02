@@ -32,4 +32,8 @@ class GoodsMgrController {
     def marketList(){
 
     }
+
+    def cityMgr(){
+
+    }
 }
