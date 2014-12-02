@@ -10,33 +10,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>后台登陆</title>
-    <link rel="stylesheet" type="text/css" href="${resource(dir:'css/admin',file:'admin_login.css')}">
-    <script type="text/javascript">
-        $(function(){
-
-        });
-    </script>
+    <link type="text/css" rel="stylesheet" href="${resource(dir: 'css/admin', file: 'adminBase.css')}"/>
 </head>
 
 <body>
-<div class="login_container">
-    <g:form controller="admin" action="login">
-        <table>
-            <tr>
-                <td colspan="2" style="color:red;font-size:10px;">${result?.msg}</td>
-            </tr>
-            <tr>
-                <td>账号:</td><td><input type="text" name="name" value="${params.name}"></td>
-            </tr>
-            <tr>
-                <td>密码:</td><td><input type="password" name="password" value="${params.password}"></td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: center"><input type="submit" value="登陆" class="login_btn"/></td><td></td>
-            </tr>
-        </table>
-    </g:form>
-</div>
-
+<g:form controller="admin" action="login">
+    <table>
+        <tr>
+            <td colspan="2">${result?.msg}</td>
+        </tr>
+        <tr>
+            <td>账号</td><td><input type="text" name="name" value="${params.name}"></td>
+        </tr>
+        <tr>
+            <td>密码</td><td><input type="password" name="password" value="${params.password}"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="登陆"/></td><td></td>
+        </tr>
+    </table>
+</g:form>
 </body>
 </html>

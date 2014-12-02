@@ -12,6 +12,7 @@ class User {
     String photo;
     String birth;
     String registerDate = new Date().format("yyyyMMddHHmmss");
+    String createName;
     String lastLoginDate = new Date().format("yyyyMMddHHmmss");
     int state = 1;
     int role = 1;
