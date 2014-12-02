@@ -26,6 +26,7 @@ class User {
         birth(nullable: true, maxSize: 255)
         state(inList: stateCnName.keySet().toList())
         role(inList: roleCnName.keySet().toList())
+        createName(nullable:true)
     }
     //字段跟数据库的关联
     static mapping = {

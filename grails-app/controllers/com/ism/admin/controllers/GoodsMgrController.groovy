@@ -28,4 +28,8 @@ class GoodsMgrController {
         jsonMap.put("rows", list);//rows键 存放每页记录 list
          render(contentType: "text/json"){return jsonMap};
     }
+
+    def marketList(){
+
+    }
 }

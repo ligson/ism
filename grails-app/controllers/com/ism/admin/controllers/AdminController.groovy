@@ -16,7 +16,7 @@ class AdminController {
         }else{
             def result = userService.login(params);
             if(result.success){
-                return redirect(controller:'layouts',action:'index')
+                return redirect(controller:'goodsMgr',action:'index')
             }else{
                 return render(view:'login',model:[result:result]);
             }

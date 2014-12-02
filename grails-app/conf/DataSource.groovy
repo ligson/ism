@@ -1,23 +1,9 @@
-dataSource {
-    pooled = true
-    jmxExport = true
-    driverClassName = "com.mysql.jdbc.Driver"
-    username = "root"
-    password = "root"
-}
-hibernate {
-    cache.use_second_level_cache = true
-    cache.use_query_cache = false
-//    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory' // Hibernate 3
-    cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
-    singleSession = true // configure OSIV singleSession mode
-    flush.mode = 'manual' // OSIV session flush mode outside of transactional context
-}
+import com.ism.system.utils.SystemConfig;
+import com.ism.system.utils.SystemConstant;
 
+SystemConfig.init("${SystemConstant.appName}")
 
 dataSource {
-    dbCreate = "update"
-    url = "jdbc:mysql://127.0.0.1:3306/ism1127?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false"
     properties {
         // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
         jmxEnabled = true
