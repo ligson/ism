@@ -37,13 +37,14 @@
 
     <div class="ism_nav col-md-8">
         <div class="ism_nav_item">
-            <a class="btn btn-default btn-block" href="#">超市管理</a></div>
+            <a class="btn btn-default btn-block" href="#">超市管理</a>
+        </div>
         <div class="ism_nav_item">
-            <a class="btn btn-default btn-block" href="#">商品管理</a></div>
+            <a class="btn btn-default btn-block" href="#">会员管理</a>
+        </div>
         <div class="ism_nav_item">
-            <a class="btn btn-default btn-block" href="#">系统管理</a></div>
-        <div class="ism_nav_item">
-            <a class="btn btn-default btn-block" href="#">商品管理</a></div>
+            <a class="btn btn-default btn-block" href="#">系统管理</a>
+        </div>
     </div>
 
 
@@ -70,45 +71,30 @@
 <div data-options="region:'west',split:false" title="导航菜单" style="width:150px;">
 <div class="easyui-accordion" style="width:148px;height:100%;">
     <div title="超市管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
-        <ul><li><a href="javascript:onClick()">超市管理</a></li></ul>
+        <ul>
+            <li><a href="#"><span>超市管理</span></a></li>
+            <li><a href="#"><span>商品管理</span></a></li>
+            <li><a href="#"><span>分类管理</span></a></li>
+        </ul>
     </div>
 
-    <div title="商品管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+    <div title="会员管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
     <ul class="easyui-tree">
         <li>
-            <span>商品分类</span>
-            <ul>
-                <li data-options="state:'closed'">
-                    <span>衣服</span>
-                    <ul>
-                        <li>
-                            <span>Friend</span>
-                        </li>
-                        <li>
-                            <span>Wife</span>
-                        </li>
-                        <li>
-                            <span>Company</span>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <span>食品</span>
-                    <ul>
-                        <li>Intel</li>
-                        <li>Java</li>
-                        <li>Microsoft Office</li>
-                        <li>Games</li>
-                    </ul>
-                </li>
-                <li>家电</li>
-                <li>小商品</li>
-                <li><a href= "${resource(dir: 'js/lib/jquery-easyui-1.4.1/demo/form', file: 'basic.html')}">欢迎</a></li>
-            </ul>
+           <a href="#"><span>会员管理</span></a>
+           <a href="#"><span>订单管理</span></a>
+           <a href="#"><span>短信管理</span></a>
+           <a href="#"><span>消息管理</span></a>
         </li>
     </ul>
 </div>
-<div title="系统管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;"></div>
+<div title="系统管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+    <ul>
+        <li><a href="#"><span>用户管理</span></a></li>
+        <li><a href="#"><span>菜单管理</span></a></li>
+        <li><a href="#"><span>角色管理</span></a></li>
+    </ul>
+</div>
 <div title="About" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;"></div>
 </div>
 

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title><g:layoutTitle/>-商品管理</title>
+    <title><g:layoutTitle/>-系统管理</title>
     <g:include view="layouts/adminCommonHead.gsp"/>
     <g:layoutHead/>
 </head>
