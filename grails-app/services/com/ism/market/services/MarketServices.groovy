@@ -8,7 +8,17 @@ import com.ism.market.domains.Market
 class MarketServices implements IMarketSerices{
 
     @Override
-    Map add(Map params) {
-        return null
+    Map addMarket(Map params) {
+        def result = [:];
+        def market=new Market();
+        market.properties=params;
+        if (market.save(flush: true) && (!market.hasErrors())) {
+            result.success = true;
+            result.market = market;
+        } else {
+            result.success = false;
+            result.msg = "保存失败!";
+        }
+      return result;
     }
 }

@@ -18,7 +18,9 @@
 <div data-options="region:'west',split:false" title="导航菜单" style="width:150px;">
     <div class="easyui-accordion" style="width:148px;height:100%;">
         <div title="系统设置" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
-            <ul><li><a href="${createLink(controller:'goodsMgr',action:'marketList')}">超市管理</a></li></ul>
+            <ul class="easyui-tree"><li><a href="${createLink(controller:'goodsMgr',action:'marketList')}">用户管理</a></li></ul>
+            <ul class="easyui-tree"><li><a href="${createLink(controller:'goodsMgr',action:'marketList')}">菜单管理</a></li></ul>
+            <ul class="easyui-tree"><li><a href="${createLink(controller:'goodsMgr',action:'marketList')}">角色管理</a></li></ul>
         </div>
 
         <div title="商品管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
