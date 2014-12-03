@@ -8,7 +8,7 @@ class AdminController {
 
     def userService;
     def index() {
-        return redirect(action:'login')
+        return render(view:'login')
     }
     def login(){
         if(request.method.equalsIgnoreCase("get")){
