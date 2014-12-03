@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>用户管理</title>
+    <title>会员管理</title>
 </head>
 <body>
 
@@ -82,7 +82,7 @@
 <script type="text/javascript">
     //datagrid初始化
     $('#list_data').datagrid({
-        title:'用户管理',
+        title:'会员管理',
         iconCls:'icon-edit',//图标
         width: 700,
         height: 'auto',

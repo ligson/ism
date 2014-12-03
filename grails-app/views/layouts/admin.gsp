@@ -19,7 +19,7 @@
     <div class="easyui-accordion" style="width:148px;height:100%;">
         <div title="会员管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
             <ul class="easyui-tree">
-                <li><a href="${createLink(controller:'goodsMgr',action:'marketList')}"><span>会员列表</span></a></li>
+                <li><a href="${createLink(controller:'admin',action:'userList')}"><span>会员列表</span></a></li>
             </ul>
         </div>
 
