@@ -59,11 +59,10 @@
             </ul>
         </div>
         <div title="地区管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
-            <ul>
+            <ul class="easyui-tree">
                 <li><a href="${createLink(controller:'goodsMgr',action:'cityMgr')}">地区列表</a></li>
             </ul>
         </div>
-        <div title="About" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;"></div>
     </div>
 
 </div>
