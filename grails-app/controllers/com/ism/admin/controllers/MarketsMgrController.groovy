@@ -1,13 +1,11 @@
 package com.ism.admin.controllers
 
-import com.ism.goods.domains.Goods
 import com.ism.user.domains.User
 import org.codehaus.groovy.grails.web.json.JSONArray
 
-class GoodsMgrController {
+class MarketsMgrController {
     def MarketServices;
     def index() {
-        return render(view: "index");
     }
     def list(){
         JSONArray result;//返回的json
@@ -29,7 +27,7 @@ class GoodsMgrController {
          render(contentType: "text/json"){return jsonMap};
     }
 
-    def goodList(){
+    def marketList(){
 
     }
     /**

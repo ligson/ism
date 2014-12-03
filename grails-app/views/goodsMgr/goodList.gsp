@@ -139,9 +139,9 @@
     var url;
     var type;
     function newuser() {
-        $("#dlg").dialog("open").dialog('setTitle', '新增用户'); ;
+        $("#dlg").dialog("open").dialog('setTitle', '新增超市'); ;
         $("#fm").form("clear");
-        url = "save";
+        url = "addMarket";
         $("#hidtype").val("submit");
     }
     function edituser() {

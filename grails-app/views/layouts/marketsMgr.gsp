@@ -17,22 +17,16 @@
 <g:include view="layouts/adminCommonBody.gsp"/>
 <div data-options="region:'west',split:false" title="导航菜单" style="width:150px;">
     <div class="easyui-accordion" style="width:148px;height:100%;">
-        <div title="商品管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+        <div title="超市管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
             <ul class="easyui-tree">
-                <li><a href="${createLink(controller:'goodsMgr',action:'marketList')}"><span>商品列表</span></a></li>
-                <li><a href="${createLink(controller:'goodsMgr',action:'marketList')}"><span>商品导入</span></a></li>
-                <li><a href="${createLink(controller:'goodsMgr',action:'marketList')}"><span>商品导出</span></a></li>
+                <li><a href="${createLink(controller:'goodsMgr',action:'goodList')}"><span>超市列表</span></a></li>
             </ul>
         </div>
-
-        <div title="分类管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+        <div title="地区管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
             <ul class="easyui-tree">
-                <li>
-                    <a href="#">分类列表</a>
-                </li>
+                <li><a href="${createLink(controller:'goodsMgr',action:'cityMgr')}">地区列表</a></li>
             </ul>
         </div>
-
     </div>
 
 </div>
