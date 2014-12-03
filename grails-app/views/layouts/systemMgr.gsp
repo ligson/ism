@@ -21,8 +21,15 @@
             <ul class="easyui-tree"><li><a href="${createLink(controller:'goodsMgr',action:'marketList')}">用户管理</a></li></ul>
             <ul class="easyui-tree"><li><a href="${createLink(controller:'goodsMgr',action:'marketList')}">菜单管理</a></li></ul>
             <ul class="easyui-tree"><li><a href="${createLink(controller:'goodsMgr',action:'marketList')}">角色管理</a></li></ul>
+            <ul class="easyui-tree"><li><a href="${createLink(controller:'goodsMgr',action:'marketList')}">元数据管理</a></li></ul>
         </div>
-
+        <div title="统计管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+            <ul class="easyui-tree">
+                <li><a href="${createLink(controller:'goodsMgr',action:'cityMgr')}">超市统计</a></li><!--统计接入APP超市的分布与数量以及名称-->
+                <li><a href="${createLink(controller:'goodsMgr',action:'cityMgr')}">商品统计</a></li><!--统计商品的销售情况-->
+                <li><a href="${createLink(controller:'goodsMgr',action:'cityMgr')}">订单统计</a></li><!--统计订单的金额数-->
+            </ul>
+        </div>
         <div title="商品管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
             <ul class="easyui-tree">
                 <li>
