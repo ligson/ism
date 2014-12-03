@@ -19,7 +19,7 @@
     <div class="easyui-accordion" style="width:148px;height:100%;">
         <div title="超市管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
             <ul class="easyui-tree">
-                <li><a href="${createLink(controller:'goodsMgr',action:'goodList')}"><span>超市列表</span></a></li>
+                <li><a href="${createLink(controller:'marketsMgr',action:'marketList')}"><span>超市列表</span></a></li>
             </ul>
         </div>
         <div title="地区管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
