@@ -11,15 +11,17 @@ class LocationService implements ILocationService{
     @Override
     void importCityData() {
         File cityData = new File(SystemConfig.webRootDir,"data/city.txt");
-
-
-        cityData.eachLine {String line->
+        cityData.eachLine {
+            String line->
+                println(line)
+        }
+       /* cityData.eachLine {String line->
             String[] strings = line.split(">{1,}")
             String postcode = strings[0];
             String areaName = strings[1];
             int level = line.count(">");
 
             print(areaName+":"+postcode+":"+level)
-        }
+        }*/
     }
 }
