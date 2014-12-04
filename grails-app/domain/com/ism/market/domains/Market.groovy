@@ -9,10 +9,12 @@ import com.ism.goods.domains.Goods
  */
 class Market {
 
-    static hasMany = [goodses:Goods,categories:Category]
-    City city;
-    Category rootCategory;
+    static hasMany = [goodses:Goods]
+    City city;//所在地区
+    def name;//名称
+    def accessTime;//接入时间
+    def state;//接入状态 0未接入 1 已接入
     static constraints = {
-        rootCategory(nullable:true)
+        accessTime(nullable:true)
     }
 }

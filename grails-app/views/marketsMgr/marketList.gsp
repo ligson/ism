@@ -10,10 +10,10 @@
     <thead>
     <tr>
         <th field="id" width="100">ID</th>
-        <th field="cellphone" width="100">部门</th>
-        <th field="password" width="100">网站</th>
-        <th field="email" width="100">名称</th>
-        <th field="nickName" width="100">管理员</th>
+        <th field="cellphone" width="100">超市名称</th>
+        <th field="password" width="100">所在地区</th>
+        <th field="email" width="100">是否已接入APP</th>
+        <th field="nickName" width="100">接入时间</th>
     </tr>
     </thead>
 </table>
@@ -25,49 +25,27 @@
     <form id="fm" method="post">
         <div class="fitem">
             <label>
-                昵称
+                超市名称
             </label>
-            <input name="nickName" class="easyui-validatebox" required="true" />
+            <input name="name" id="name" class="easyui-validatebox" required="true" />
         </div>
         <div class="fitem">
             <label>
-                手机号</label>
-            <input name="cellphone" class="easyui-validatebox" required="true" />
+                所在地区</label>
+            <input name="cid" class="easyui-validatebox" required="true" />
         </div>
         <div class="fitem">
             <label>
-                电子邮件</label>
-            <input name="email" class="easyui-vlidatebox" />
+                是否已接入APP</label>
+            <select id="state" name="state" class="easyui-combobox" style="width:200px;">
+                <option value="0">未接入</option>
+                <option value="1">已接入</option>
+            </select>
         </div>
         <div class="fitem">
             <label>
-                密码</label>
-            <input name="password" class="easyui-validatebox" required="true" />
-        </div>
-        <div class="fitem">
-            <label>
-                性别</label>
-            <input name="sex" class="easyui-vlidatebox" />
-        </div>
-        <div class="fitem">
-            <label>
-                生日</label>
-            <input name="birth" class="easyui-vlidatebox" />
-        </div>
-        <div class="fitem">
-            <label>
-                用户头像</label>
-            <input name="photo" class="easyui-vlidatebox" />
-        </div>
-        <div class="fitem">
-            <label>
-                创建时间</label>
-            <input name="CreateTime" class="easyui-datebox" required="true" />
-        </div>
-        <div class="fitem">
-            <label>
-                创建人</label>
-            <input name="CreateName" class="easyui-vlidatebox" />
+                接入时间</label>
+            <input name="accessTime" id="accessTime" class="easyui-datebox" required="true" />
         </div>
         <input type="hidden" name="action" id="hidtype" />
         <input type="hidden" name="ID" id="Nameid" />
