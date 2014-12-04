@@ -86,12 +86,7 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <td>介绍:</td>
-                    <td>
-                        <textarea  class="easyui-textbox" name="description" data-options="multiline:true"></textarea>
-                    </td>
-                </tr>
+
                 <tr>
                     <td>邮编:</td>
                     <td>
@@ -100,7 +95,13 @@
                 </tr>
                 <tr>
                     <td>级别:</td>
-                    <td><input class="easy-textbox" name="level" data-options="require:true,readonly:true"></td>
+                    <td><input class="easy-textbox" name="level" data-options="require:true" disabled="disabled"></td>
+                </tr>
+                <tr>
+                    <td rowspan="2">介绍:</td>
+                    <td rowspan="2">
+                        <textarea  class="easyui-textbox" name="description" data-options="multiline:true"></textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -108,6 +109,7 @@
                         <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">Clear</a>
                     </td>
                 </tr>
+
             </table>
             </g:form>
         </div>
