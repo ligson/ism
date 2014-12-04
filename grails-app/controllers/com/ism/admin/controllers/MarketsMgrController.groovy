@@ -4,7 +4,7 @@ import com.ism.user.domains.User
 import org.codehaus.groovy.grails.web.json.JSONArray
 
 class MarketsMgrController {
-    def MarketServices;
+    def marketService;
     def index() {
     }
     def list(){
@@ -34,7 +34,7 @@ class MarketsMgrController {
      * 新增超市
      */
     def addMarket(){
-        MarketServices.addMarket(params);
+        marketService.addMarket(params);
     }
     def cityMgr(){
 
