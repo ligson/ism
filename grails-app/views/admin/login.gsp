@@ -10,6 +10,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>后台登陆</title>
+    <meta name="layout" content="none">
     <link rel="stylesheet" type="text/css" href="${resource(dir:'css/admin',file:'admin_login.css')}">
     <script type="text/javascript">
         $(function(){
