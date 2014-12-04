@@ -20,35 +20,35 @@
 <div id="dlg" class="easyui-dialog" style="width: 400px; height: 280px; padding: 10px 20px;"
      closed="true" buttons="#dlg-buttons">
     <div class="ftitle">
-        信息编辑
+
     </div>
     <form id="fm" method="post">
         <div class="fitem">
-            <label>
+            <label style="width:100px;">
                 超市名称
             </label>
-            <input name="name" id="name" class="easyui-validatebox" required="true" />
+            <input name="name" id="name" class="easyui-validatebox" required="true" style="width:200px;"/>
         </div>
         <div class="fitem">
-            <label>
+            <label style="width:100px;">
                 所在地区</label>
-            <input name="cid" class="easyui-validatebox" required="true" />
+            <input  class="easyui-combobox" name="cid" style="width:200px;"
+                   data-options="valueField:'id',textField:'text',url:'${resource(dir: 'data', file: 'city.txt')}'">
         </div>
         <div class="fitem">
-            <label>
+            <label style="width:100px;">
                 是否已接入APP</label>
             <select id="state" name="state" class="easyui-combobox" style="width:200px;">
-                <option value="0">未接入</option>
+                <option value="0" selected="selected">未接入</option>
                 <option value="1">已接入</option>
             </select>
         </div>
         <div class="fitem">
-            <label>
+            <label style="width:100px;">
                 接入时间</label>
-            <input name="accessTime" id="accessTime" class="easyui-datebox" required="true" />
+            <input name="accessTime" id="accessTime" class="easyui-datebox" required="true" style="width:200px;" />
         </div>
         <input type="hidden" name="action" id="hidtype" />
-        <input type="hidden" name="ID" id="Nameid" />
     </form>
 </div>
 ?<div id="dlg-buttons">
@@ -113,6 +113,11 @@
          alert('before refresh');
          $(this).pagination('loaded');
          }*/
+    });
+    $('#cid').combobox({
+        url:'cityData',
+        valueField:'id',
+        textField:'text'
     });
     var url;
     var type;

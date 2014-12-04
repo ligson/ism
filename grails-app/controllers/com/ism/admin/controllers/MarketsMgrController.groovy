@@ -1,5 +1,6 @@
 package com.ism.admin.controllers
 
+import com.ism.system.utils.SystemConfig
 import com.ism.user.domains.User
 import org.codehaus.groovy.grails.web.json.JSONArray
 
@@ -36,7 +37,14 @@ class MarketsMgrController {
     def addMarket(){
         marketService.addMarket(params);
     }
-    def cityMgr(){
-
+    def cityData(){
+        File cityData = new File(SystemConfig.webRootDir,"data/city.txt");
+        def json="";
+        cityData.eachLine {
+            String line->
+            json+=line;
+        }
+        render(contentType: "text/json"){return json};
     }
+
 }
