@@ -51,6 +51,10 @@ class MarketsMgrController {
         return render(result as JSON);
     }
 
+    def removeCity(){
+        def result = locationService.removeCity(params);
+        return render(result as JSON);
+    }
     def cityList() {
         List<City> cities = [];
         if (params.id) {

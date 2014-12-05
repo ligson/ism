@@ -16,11 +16,11 @@ function addArea() {
     if (node) {
         //cityName1.textbox("setText", node.text);
         cityFid1.textbox("setValue", node.id);
-        cityLevel1.textbox("setValue", node.level+1);
+        cityLevel1.textbox("setValue", node.level + 1);
         //cityCode1.textbox("setText", node.code);
         //cityDescription1.textbox("setText", node.description);
         //cityType1.combobox("setValue", node.type);
-    }else{
+    } else {
         cityLevel1.textbox("setText", 1);
     }
     $("#addAreaDlg").dialog("open");
@@ -55,10 +55,10 @@ $(function () {
         success: function (data) {
             data = eval("(" + data + ")");
             if (data.success) {
-                $.messager.alert("提示信息","添加成功!","info");
+                $.messager.alert("提示信息", "添加成功!", "info");
                 $("#addAreaDlg").dialog("close");
             } else {
-                $.messager.alert("提示信息","天津失败!","error");
+                $.messager.alert("提示信息", "天津失败!", "error");
             }
         }
     });
@@ -74,8 +74,7 @@ $(function () {
         required: true
     });
     var cityType = form.find("select[name='type']");
-    cityType.combobox({
-    });
+    cityType.combobox({});
     var cityLevel = form.find("input[name='level']");
     cityLevel.textbox({
         required: true,
@@ -93,30 +92,53 @@ $(function () {
             cityCode.textbox("setText", node.code);
             cityLevel.textbox("setText", node.level);
             cityDescription.textbox("setText", node.description);
+        },
+        onContextMenu: function (e, node) {
+            e.preventDefault();
+            $("#treeMenu").menu('show', {
+                left: e.pageX,
+                top: e.pageY
+            });
         }
     });
 
     form.form({
-        success:function(data){
+        success: function (data) {
             data = eval("(" + data + ")");
             if (data.success) {
-                $.messager.alert("提示信息","修改成功!","info");
+                $.messager.alert("提示信息", "修改成功!", "info");
                 var nodeId = cityId.textbox("getValue");
-                if(nodeId){
-                    var node = $("#cityTree").tree("find",nodeId);
-                    if(node){
-                        $("#cityTree").tree("update",{
-                            target:node.target,
-                            text:cityName.textbox("getText"),
-                            type:cityType.combobox("getValue"),
-                            description:cityDescription.textbox("getText"),
-                            code:cityCode.textbox("getText")
+                if (nodeId) {
+                    var node = $("#cityTree").tree("find", nodeId);
+                    if (node) {
+                        $("#cityTree").tree("update", {
+                            target: node.target,
+                            text: cityName.textbox("getText"),
+                            type: cityType.combobox("getValue"),
+                            description: cityDescription.textbox("getText"),
+                            code: cityCode.textbox("getText")
                         });
                     }
                 }
             } else {
-                $.messager.alert("提示信息","修改失败!","error");
+                $.messager.alert("提示信息", "修改失败!", "error");
             }
         }
     });
 });
+function removeit() {
+    var cityTree = $("#cityTree");
+    var node = cityTree.tree("getSelected");
+    if (node) {
+        $.post(baseUrl + "marketsMgr/removeCity", {cityId: node.id}, function (data) {
+            if (data.success) {
+                $.messager.alert("提示信息", "删除成功!", "info");
+                if (node) {
+                    cityTree.tree("remove", node.target);
+                }
+            } else {
+                $.messager.alert("提示信息", "删除失败!" + data.msg, "error");
+            }
+        });
+    }
+}

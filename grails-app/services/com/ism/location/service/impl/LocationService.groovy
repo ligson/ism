@@ -2,6 +2,7 @@ package com.ism.location.service.impl
 
 import com.ism.address.domains.City
 import com.ism.location.service.ILocationService
+import com.ism.market.domains.Market
 import com.ism.system.utils.SystemConfig
 import grails.transaction.Transactional
 
@@ -55,6 +56,33 @@ class LocationService implements ILocationService {
             result.msg = "数据库错误!";
         }
         return result;
+    }
+
+    public Map removeCity(Map params){
+        def result = [:];
+        def cityId = params.cityId;
+        City city = City.findById(cityId);
+        if(city){
+            int count = City.countByFatherCity(city);
+            int marketCount = Market.countByCity(city);
+            if(count>0){
+                result.success = false;
+                result.msg = "请先删除下级地区";
+                return result;
+            }
+            if(marketCount>0){
+                result.success = false;
+                result.msg = "请先移除该地区的超市!";
+                return result;
+            }
+            city.delete(flush:true)
+            result.success = true;
+            return result;
+        }else{
+            result.success = false;
+            result.msg = "地区未找到！";
+            return result;
+        }
     }
 
 }

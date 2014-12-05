@@ -18,7 +18,7 @@
         <ul id="cityTree">
         </ul>
 
-        <div id="mm" class="easyui-menu" style="width:120px;">
+        <div id="treeMenu" class="easyui-menu" style="width:120px;">
             <div onclick="append()" data-options="iconCls:'icon-add'">Append</div>
 
             <div onclick="removeit()" data-options="iconCls:'icon-remove'">Remove</div>
