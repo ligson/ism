@@ -13,6 +13,7 @@ $(function(){
     var showIndex = $.cookie("admin-menu-index-"+about);
     var accordion = $(".easyui-accordion");
     if(showIndex){
+        var navTree = $(liMenu[showIndex]).parents(".easyui-tree");
         var panel = $(liMenu[showIndex]).parents(".panel")[0];
         var panelArray = accordion.find(".panel");
         var panelIndex = panelArray.index(panel);
@@ -20,4 +21,16 @@ $(function(){
         var navTitle = $(panel).find(".panel-title").html()+"&gt;&gt;"+$(liMenu[showIndex]).find("a").html();
         $("#mainDiv").panel("setTitle",navTitle)
     }
+
+    $(".ism_nav_item").click(function(){
+        for(var obj in $.cookie()){
+            if(typeof(obj)=="string"){
+                var proName = obj+"";
+                if(proName.indexOf("admin-menu-index-")!=-1){
+                    $.cookie(proName,null);
+                }
+            }
+        }
+
+    });
 });
