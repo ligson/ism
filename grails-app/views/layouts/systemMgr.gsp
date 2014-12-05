@@ -15,7 +15,7 @@
 
 <body class="easyui-layout">
 <g:include view="layouts/adminCommonBody.gsp"/>
-<div data-options="region:'west',split:false" title="导航菜单" style="width:150px;">
+<div id="westPanel"  data-options="region:'west',split:false" title="导航菜单" style="width:150px;"  about="systemMgr">
     <div class="easyui-accordion" style="width:148px;height:100%;">
         <div title="系统设置" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
             <ul class="easyui-tree"><li><a href="${createLink(controller:'goodsMgr',action:'marketList')}">用户管理</a></li></ul>
