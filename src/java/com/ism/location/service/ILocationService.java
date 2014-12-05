@@ -5,4 +5,5 @@ package com.ism.location.service;
  */
 public interface ILocationService {
     public void importCityData();
+
 }

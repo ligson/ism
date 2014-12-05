@@ -15,38 +15,7 @@
 <body>
 <div class="easyui-layout" data-options="fit:true">
     <div data-options="region:'west'" style="width:200px" title="22">
-        <ul class="easyui-tree">
-            <li>
-                <span>My Documents</span>
-                <ul>
-                    <li data-options="state:'closed'">
-                        <span>Photos</span>
-                        <ul>
-                            <li>
-                                <span>Friend</span>
-                            </li>
-                            <li>
-                                <span>Wife</span>
-                            </li>
-                            <li>
-                                <span>Company</span>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span>Program Files</span>
-                        <ul>
-                            <li>Intel</li>
-                            <li>Java</li>
-                            <li>Microsoft Office</li>
-                            <li>Games</li>
-                        </ul>
-                    </li>
-                    <li>index.html</li>
-                    <li>about.html</li>
-                    <li>welcome.html</li>
-                </ul>
-            </li>
+        <ul id="cityTree">
         </ul>
 
         <div id="mm" class="easyui-menu" style="width:120px;">
@@ -63,58 +32,97 @@
     </div>
 
     <div data-options="region:'center',fit:true" title="22323">
-        <a href="javascript:void(0);" onclick="addArea()" class="easyui-linkbutton"
-           data-options="iconCls:'icon-add'">添加地区</a>
 
-        <div id="addAreaDlg" class="easyui-dialog" title="添加地区" style="width:400px;height:200px;"
-             data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
-            <g:form controller="goodsMgr" action="addCity">
-
-            <input type="hidden" value="">
+        <g:form controller="marketsMgr" action="addCity" name="modifyCityForm">
             <table>
                 <tr>
-                    <td>名称：</td>
-                    <td><input class="easyui-textbox" type="text" name="name" data-options="required:true"></td>
+                    <td colspan="2">当前选择地区<input type="hidden" name="cityId" value=""/></td>
                 </tr>
                 <tr>
-                    <td>类型：</td>
+                    <td>地区名称:</td><td><input type="text" name="name" value=""></td>
+                </tr>
+                <tr>
+                    <td>地区类型:</td><td>
+                    <select name="type">
+                        <g:each in="${City.typeCnName.keySet()}" var="key">
+                            <option value="${key}">${City.typeCnName.get(key)}</option>
+                        </g:each>
+                    </select>
+                </td>
+                </tr>
+                <tr>
+                    <td>地区邮编:</td><td><input type="text" name="code" value=""/></td>
+                </tr>
+                <tr>
+                    <td>地区级别:</td><td><input type="text" name="level" value=""></td>
+                </tr>
+                <tr>
+                    <td>地区介绍:</td>
                     <td>
-                        <select class="easyui-combobox" name="type">
-                            <g:each in="${City.typeCnName.keySet()}" var="key">
-                                <option value="${key}">${City.typeCnName.get(key)}</option>
-                            </g:each>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>邮编:</td>
-                    <td>
-                        <input  class="easyui-textbox" name="code" data-options="require:true"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>级别:</td>
-                    <td><input class="easy-textbox" name="level" data-options="require:true" disabled="disabled"></td>
-                </tr>
-                <tr>
-                    <td rowspan="2">介绍:</td>
-                    <td rowspan="2">
-                        <textarea  class="easyui-textbox" name="description" data-options="multiline:true"></textarea>
+                        <textarea name="description"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitAddAreaForm()">Submit</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">Clear</a>
+                        <input type="submit" class="easyui-linkbutton"  value="修改"/>
                     </td>
                 </tr>
-
             </table>
-            </g:form>
-        </div>
+        </g:form>
+
+        <a href="javascript:void(0);" onclick="addArea()" class="easyui-linkbutton"
+           data-options="iconCls:'icon-add'">添加地区</a>
+
     </div>
 </div>
 
+
+<div id="addAreaDlg" class="easyui-dialog" title="添加地区" style="width:400px;height:300px;"
+     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+    <g:form controller="marketsMgr" action="addCity" name="addCityForm">
+
+        <input type="hidden" name="fId" value="">
+        <table>
+            <tr>
+                <td>名称：</td>
+                <td><input type="text" name="name" ></td>
+            </tr>
+            <tr>
+                <td>类型：</td>
+                <td>
+                    <select  name="type">
+                        <g:each in="${City.typeCnName.keySet()}" var="key">
+                            <option value="${key}">${City.typeCnName.get(key)}</option>
+                        </g:each>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>邮编:</td>
+                <td>
+                    <input  name="code" value=""/>
+                </td>
+            </tr>
+            <tr>
+                <td>级别:</td>
+                <td><input  name="level"  disabled="disabled"></td>
+            </tr>
+            <tr>
+                <td>介绍:</td>
+                <td>
+                    <input name="description" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" class="easyui-linkbutton" value="提交"/>
+                    <input type="reset" class="easyui-linkbutton" value="重置"/>
+                </td>
+            </tr>
+
+        </table>
+    </g:form>
+</div>
 </body>
 </html>

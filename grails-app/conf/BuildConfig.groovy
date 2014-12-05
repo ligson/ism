@@ -6,7 +6,18 @@ grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
+boolean isDevModel = (Environment.current == Environment.DEVELOPMENT)
+// URL Mapping Cache Max Size, defaults to 5000
+//grails.urlmapping.cache.maxsize = 1000
+grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/skin/*']
+grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/skin/**']
+grails.resources.adhoc.excludes = ["**/*.swp", "**/*.html", '**/WEB-INF/**', '**/META-INF/**', '**/*.class', '**/*.jar', '**/*.properties', '**/*.groovy', '**/*.gsp', '**/*.java']
+grails.resources.debug = isDevModel
 
+grails.resources.mappers.zip.excludes = ["**/*.png", "**/*.gif", "**/*.jpg", "**/*.less"]
+// Legacy setting for codec used to encode data with ${}
+grails.views.default.codec = "none"
+grails.json.legacy.builder = false
 
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {

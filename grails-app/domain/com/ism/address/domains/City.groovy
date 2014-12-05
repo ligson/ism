@@ -32,10 +32,10 @@ class City {
     static final int TYPE_PROVINCE_CITY = 5;
 
     static final Map typeCnName = [
-            TYPE_PROVINCE : "省",
-            TYPE_CITY     : "市",
-            TYPE_CITY_AREA: "市辖区",
-            TYPE_COUNTY   : "县",
-            TYPE_PROVINCE_CITY :"直辖市"
+            1 : "省",
+            2     : "市",
+            3: "市辖区",
+            4   : "县",
+            5 :"直辖市"
     ]
 }

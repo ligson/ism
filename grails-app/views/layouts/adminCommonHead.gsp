@@ -10,3 +10,4 @@
 <r:layoutResources/>
 <r:layoutResources/>
 <link type="text/css" rel="stylesheet" href="${resource(dir: 'css/admin', file: 'adminBase.css')}"/>
+<script type="text/javascript" src="${resource(dir:'js/ism/common',file:'baseurl.js')}"></script>
