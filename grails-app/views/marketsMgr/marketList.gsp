@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<%@ page import="com.ism.market.domains.Market" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>超市管理</title>
+    <script type="text/javascript" src="${resource(dir: "js/ism/admin", file: "cityMgr.js")}"></script>
 </head>
 <body>
 
@@ -10,10 +11,10 @@
     <thead>
     <tr>
         <th field="id" width="100">ID</th>
-        <th field="cellphone" width="100">超市名称</th>
-        <th field="password" width="100">所在地区</th>
-        <th field="email" width="100">是否已接入APP</th>
-        <th field="nickName" width="100">接入时间</th>
+        <th field="name" width="100">超市名称</th>
+        <th field="market.city.id" width="100">所在地区</th>
+        <th field="state" width="100">是否已接入APP</th>
+        <th field="accessTime" width="100">接入时间</th>
     </tr>
     </thead>
 </table>
@@ -32,16 +33,17 @@
         <div class="fitem">
             <label style="width:100px;">
                 所在地区</label>
-            <input  class="easyui-combobox" name="cid" style="width:200px;"
-                   data-options="valueField:'id',textField:'text',url:'${resource(dir: 'data', file: 'city.txt')}'">
+            <input class="easyui-combotree" name="cid" data-options="url:'cityList',method:'get',required:true" style="width:200px;">
         </div>
         <div class="fitem">
             <label style="width:100px;">
                 是否已接入APP</label>
-            <select id="state" name="state" class="easyui-combobox" style="width:200px;">
-                <option value="0" selected="selected">未接入</option>
-                <option value="1">已接入</option>
+            <select name="state"style="width:200px;" class="easyui-combobox">
+                <g:each in="${Market.stateCnName.keySet()}" var="key">
+                    <option value="${key}">${Market.stateCnName.get(key)}</option>
+                </g:each>
             </select>
+
         </div>
         <div class="fitem">
             <label style="width:100px;">
@@ -142,7 +144,7 @@
                 return $(this).form("validate");
             },
             success: function (result) {
-                if (result == "1") {
+                if (result.success) {
                     $.messager.alert("提示信息", "操作成功");
                     $("#dlg").dialog("close");
                     $("#dg").datagrid("load");
