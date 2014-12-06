@@ -18,11 +18,10 @@ class MarketService implements IMarketSerices{
         //market.properties=params;
         if (market.save(flush: true)) {
             result.success = true;
-            result.market = market;
         } else {
             result.success = false;
             result.msg = "保存失败!";
         }
-      return result;
+        return result;
     }
 }

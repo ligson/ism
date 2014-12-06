@@ -27,15 +27,21 @@ class MarketsMgrController {
         int total=Market.findAll().size();
         if(total>0){
             list=Market.findAll();
-            for (int i=0;i<list.size();i++){
-                list.get(i).setCity(list.get(i).getCity().getName());
-            }
         }
-
         Map<String, Object> jsonMap = new HashMap<String, Object>();//定义map
         jsonMap.put("total", total);//total键 存放总记录数，必须的
         jsonMap.put("rows", list);//rows键 存放每页记录 list
-        render(contentType: "text/json") { return jsonMap };
+        def res = [];
+        list.each {
+            def tmp = [:];
+            tmp.id= it.id;
+            tmp.name = it.name;
+            tmp.accessTime = it.accessTime;
+            tmp.state = it.state;
+            tmp.city = it.city;
+            res.add(tmp);
+        }
+        return render(res as JSON);
     }
 
     def marketList() {
@@ -45,7 +51,8 @@ class MarketsMgrController {
      * 新增超市
      */
     def addMarket() {
-        marketService.addMarket(params);
+        def result=marketService.addMarket(params);
+        return render(result as JSON);
     }
 
     def cityMgr() {

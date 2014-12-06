@@ -6,18 +6,7 @@
     <script type="text/javascript" src="${resource(dir: "js/ism/admin", file: "cityMgr.js")}"></script>
 </head>
 <body>
-
-<table id="list_data" cellspacing="0" cellpadding="0">
-    <thead>
-    <tr>
-        <th field="id" width="100">ID</th>
-        <th field="name" width="100">超市名称</th>
-        <th field="market.city.id" width="100">所在地区</th>
-        <th field="state" width="100">是否已接入APP</th>
-        <th field="accessTime" width="100">接入时间</th>
-    </tr>
-    </thead>
-</table>
+<div id="list_data"></div>
 <div id="dlg" class="easyui-dialog" style="width: 400px; height: 280px; padding: 10px 20px;"
      closed="true" buttons="#dlg-buttons">
     <div class="ftitle">
@@ -61,7 +50,24 @@
 
 <script type="text/javascript">
     //datagrid初始化
-    $('#list_data').datagrid({
+    var datagrid=$('#list_data').datagrid({
+        columns:[[
+            {field:'id',title:'ID',width:'20%',align:'center'},
+            {field:'name',title:'超市名称',width:'20%',align:'center'},
+            {field:'city',title:'所在地区',width:'20%',align:'center',formatter:function(value){
+                return value.name;
+            }},
+            {field:'state',title:'是否已接入APP',width:'20%',align:'center',
+                formatter:function(value){
+            if(value==0){
+                return "未接入";
+            }else{
+                return "已接入";
+            }}
+            },
+
+            {field:'accessTime',title:'接入时间',width:'20%',align:'center'}
+        ]],
         title:'超市管理',
         iconCls:'icon-edit',//图标
         width: 700,
@@ -144,10 +150,11 @@
                 return $(this).form("validate");
             },
             success: function (result) {
-                if (result.success) {
+                data = eval("(" + result + ")");
+                if (data.success) {
                     $.messager.alert("提示信息", "操作成功");
                     $("#dlg").dialog("close");
-                    $("#dg").datagrid("load");
+                    datagrid.datagrid("reload");
                 }
                 else {
                     $.messager.alert("提示信息", "操作失败");
