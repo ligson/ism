@@ -7,7 +7,11 @@ import com.ism.market.domains.Market
  * Created by ZhengYunFei on 2014/11/27.
  */
 class MarketService implements IMarketSerice{
-
+/**
+ * 新增超市
+ * @param params
+ * @return
+ */
     @Override
     Map addMarket(Map params) {
         def result = [:];
@@ -24,9 +28,14 @@ class MarketService implements IMarketSerice{
         }
         return result;
     }
+    /**
+     * 更新超市
+     * @param params
+     * @return
+     */
     Map updateMarket(Map params){
         def result=[:];
-        def market=Market.findById(id);
+        def market=Market.findById(params.id);
         market.name=params.name;
         market.state=params.state;
         market.accessTime=params.accessTime;
@@ -37,6 +46,22 @@ class MarketService implements IMarketSerice{
         } else {
             result.success = false;
             result.msg = "保存失败!";
+        }
+        return result;
+    }
+    /**
+     * 删除超市
+     * @param params
+     * @return
+     */
+    Map removeMarket(Map params){
+        def result=[:];
+        Market market=Market.findById(params.id);
+        if(market){
+             market.delete(flush:true)
+             result.success = true;
+        }else{
+            result.success=false;
         }
         return result;
     }

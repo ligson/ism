@@ -62,6 +62,13 @@ class MarketsMgrController {
         def result=marketService.updateMarket(params);
         return render(result as JSON);
     }
+    /**
+     * 删除超市
+     */
+    def removeMarket(){
+        def result=marketService.removeMarket(params);
+        return render(result as JSON);
+    }
     def cityMgr() {
 
     }

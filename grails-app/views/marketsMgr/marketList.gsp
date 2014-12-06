@@ -43,7 +43,7 @@
     </form>
 </div>
 ?<div id="dlg-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="saveuser()" iconcls="icon-save">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="save()" iconcls="icon-save">保存</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')"
        iconcls="icon-cancel">取消</a>
 </div>
@@ -92,19 +92,19 @@
             text: '添加',
             iconCls: 'icon-add',
             handler: function() {
-                newuser();
+                addMarket();
             }
         }, '-', {
             text: '修改',
             iconCls: 'icon-edit',
             handler: function() {
-                edituser();
+                updateMarket();
             }
         }, '-',{
             text: '删除',
             iconCls: 'icon-remove',
             handler: function(){
-                alert("删除");
+                removeMarket();
             }
         }]
     });
@@ -124,13 +124,13 @@
     });
     var url;
     var type;
-    function newuser() {
+    function addMarket() {
         $("#dlg").dialog("open").dialog('setTitle', '新增超市'); ;
         $("#fm").form("clear");
         url = "addMarket";
         $("#hidtype").val("submit");
     }
-    function edituser() {
+    function updateMarket() {
         var row = datagrid.datagrid("getSelected");
         if (row) {
             $("#dlg").dialog("open").dialog('setTitle', '编辑超市');
@@ -138,7 +138,7 @@
             url = "updateMarket?id=" + row.id;
         }
     }
-    function saveuser() {
+    function save() {
         $("#fm").form("submit", {
             url: url,
             onsubmit: function () {
@@ -157,18 +157,18 @@
             }
         });
     }
-    function destroyUser() {
-        var row = $('#dg').datagrid('getSelected');
+    function removeMarket() {
+        var row = datagrid.datagrid('getSelected');
         if (row) {
-            $.messager.confirm('Confirm', 'Are you sure you want to destroy this user?', function (r) {
+            $.messager.confirm('Confirm', '确定要删除选择的数据吗?', function (r) {
                 if (r) {
-                    $.post('destroy_user.php', { id: row.id }, function (result) {
+                    $.post('removeMarket', { id: row.id }, function (result) {
                         if (result.success) {
-                            $('#dg').datagrid('reload');    // reload the user data
+                            datagrid.datagrid("reload");    // reload the user data
                         } else {
                             $.messager.show({   // show error message
                                 title: 'Error',
-                                msg: result.errorMsg
+                                msg:"操作失败"
                             });
                         }
                     }, 'json');
