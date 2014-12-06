@@ -24,4 +24,20 @@ class MarketService implements IMarketSerices{
         }
         return result;
     }
+    Map updateMarket(Map params){
+        def result=[:];
+        def market=Market.findById(id);
+        market.name=params.name;
+        market.state=params.state;
+        market.accessTime=params.accessTime;
+        City city=City.findById(params.cid);
+        market.city=city;
+        if (market.save(flush: true)) {
+            result.success = true;
+        } else {
+            result.success = false;
+            result.msg = "保存失败!";
+        }
+        return result;
+    }
 }

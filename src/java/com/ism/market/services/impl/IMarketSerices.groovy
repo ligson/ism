@@ -5,4 +5,5 @@ package com.ism.market.services.impl
  */
 interface IMarketSerices {
     public Map addMarket(Map params);
+    public Map updateMarket(Map params);
 }

@@ -71,7 +71,7 @@ class UserService implements IUserService {
         if(!superAdmin){
             superAdmin = new User();
             log.info("超级管理员不存在！初始化超级管理员!")
-            superAdmin.cellphone = "1383838521";
+            superAdmin.cellphone = "13717625140";
             superAdmin.email = "admin@admin.com";
             superAdmin.nickName = "超级管理员";
             superAdmin.password = "password".encodeAsSHA1();

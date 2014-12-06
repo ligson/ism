@@ -22,7 +22,7 @@
         <div class="fitem">
             <label style="width:100px;">
                 所在地区</label>
-            <input class="easyui-combotree" name="cid" data-options="url:'cityList',method:'get',required:true" style="width:200px;">
+            <input class="easyui-combotree" id="cid" name="cid" data-options="url:'cityList',method:'get',required:true" style="width:200px;">
         </div>
         <div class="fitem">
             <label style="width:100px;">
@@ -122,11 +122,6 @@
          $(this).pagination('loaded');
          }*/
     });
-    $('#cid').combobox({
-        url:'cityData',
-        valueField:'id',
-        textField:'text'
-    });
     var url;
     var type;
     function newuser() {
@@ -136,11 +131,11 @@
         $("#hidtype").val("submit");
     }
     function edituser() {
-        var row = $("#dg").datagrid("getSelected");
+        var row = datagrid.datagrid("getSelected");
         if (row) {
-            $("#dlg").dialog("open").dialog('setTitle', 'Edit User');
+            $("#dlg").dialog("open").dialog('setTitle', '编辑超市');
             $("#fm").form("load", row);
-            url = "UserManage.aspx?id=" + row.ID;
+            url = "updateMarket?id=" + row.id;
         }
     }
     function saveuser() {
