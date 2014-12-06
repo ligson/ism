@@ -6,7 +6,7 @@ import com.ism.market.domains.Market
 /**
  * Created by ZhengYunFei on 2014/11/27.
  */
-class MarketService implements IMarketSerices{
+class MarketService implements IMarketSerice{
 
     @Override
     Map addMarket(Map params) {
