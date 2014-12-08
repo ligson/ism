@@ -16,7 +16,7 @@
 
 package com.ism.ueditor.taglib
 
-import com.baidu.ueditorTest.hunter.FileManager
+import com.baidu.ueditor.hunter.FileManager
 import grails.converters.JSON
 import org.springframework.util.StringUtils
 import ueditor.utils.Uploader

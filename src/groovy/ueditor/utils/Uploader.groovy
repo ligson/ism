@@ -1,5 +1,5 @@
 package ueditor.utils
-import com.baidu.ueditorTest.PathFormat
+import com.baidu.ueditor.PathFormat
 import org.apache.commons.fileupload.FileUploadBase
 import org.apache.commons.fileupload.FileUploadException
 import org.apache.commons.fileupload.servlet.ServletFileUpload
@@ -51,7 +51,7 @@ class Uploader {
             File ofile = new File(this.getPhysicalPath(request, this.url))
             ofile.getParentFile().mkdirs()
             file.transferTo(ofile)
-            this.state =
+            this.state =ErrorCode.SUCCESS
             this.size = file.size
         } catch (FileUploadBase.SizeLimitExceededException e) {
             this.state = ErrorCode.SIZE

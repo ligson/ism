@@ -1,10 +1,10 @@
 package com.baidu.ueditor.upload;
 
-import com.baidu.ueditorTest.PathFormat;
-import com.baidu.ueditorTest.define.AppInfo;
-import com.baidu.ueditorTest.define.BaseState;
-import com.baidu.ueditorTest.define.FileType;
-import com.baidu.ueditorTest.define.State;
+import com.baidu.ueditor.PathFormat;
+import com.baidu.ueditor.define.AppInfo;
+import com.baidu.ueditor.define.BaseState;
+import com.baidu.ueditor.define.FileType;
+import com.baidu.ueditor.define.State;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,7 +72,7 @@ public class BinaryUploader {
 			String physicalPath = (String) conf.get("rootPath") + savePath;
 
 			InputStream is = fileStream.openStream();
-			State storageState = com.baidu.ueditorTest.upload.StorageManager.saveFileByInputStream(is,
+			State storageState = com.baidu.ueditor.upload.StorageManager.saveFileByInputStream(is,
 					physicalPath, maxSize);
 			is.close();
 

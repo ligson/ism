@@ -6,9 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.baidu.ueditorTest.Encoder;
-import com.baidu.ueditorTest.define.AppInfo;
-import com.baidu.ueditorTest.define.State;
+import com.baidu.ueditor.Encoder;
+import com.baidu.ueditor.define.AppInfo;
+import com.baidu.ueditor.define.State;
 
 /**
  * 多状态集合状态
@@ -35,7 +35,7 @@ public class MultiState implements State {
 	
 	public MultiState ( boolean state, int infoKey ) {
 		this.state = state;
-		this.info = com.baidu.ueditorTest.define.AppInfo.getStateInfo(infoKey);
+		this.info = com.baidu.ueditor.define.AppInfo.getStateInfo(infoKey);
 	}
 	
 	@Override

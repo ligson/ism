@@ -7,11 +7,11 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 
-import com.baidu.ueditorTest.PathFormat;
-import com.baidu.ueditorTest.define.AppInfo;
-import com.baidu.ueditorTest.define.BaseState;
-import com.baidu.ueditorTest.define.MultiState;
-import com.baidu.ueditorTest.define.State;
+import com.baidu.ueditor.PathFormat;
+import com.baidu.ueditor.define.AppInfo;
+import com.baidu.ueditor.define.BaseState;
+import com.baidu.ueditor.define.MultiState;
+import com.baidu.ueditor.define.State;
 
 public class FileManager {
 

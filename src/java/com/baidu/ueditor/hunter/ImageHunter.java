@@ -6,13 +6,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import com.baidu.ueditorTest.PathFormat;
-import com.baidu.ueditorTest.define.AppInfo;
-import com.baidu.ueditorTest.define.BaseState;
-import com.baidu.ueditorTest.define.MIMEType;
-import com.baidu.ueditorTest.define.MultiState;
-import com.baidu.ueditorTest.define.State;
-import com.baidu.ueditorTest.upload.StorageManager;
+import com.baidu.ueditor.PathFormat;
+import com.baidu.ueditor.define.AppInfo;
+import com.baidu.ueditor.define.BaseState;
+import com.baidu.ueditor.define.MIMEType;
+import com.baidu.ueditor.define.MultiState;
+import com.baidu.ueditor.define.State;
+import com.baidu.ueditor.upload.StorageManager;
 
 /**
  * 图片抓取器

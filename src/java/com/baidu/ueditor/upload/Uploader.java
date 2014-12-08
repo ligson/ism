@@ -1,7 +1,7 @@
 package com.baidu.ueditor.upload;
 
-import com.baidu.ueditorTest.define.State;
-import com.baidu.ueditorTest.upload.Base64Uploader;
+import com.baidu.ueditor.define.State;
+import com.baidu.ueditor.upload.Base64Uploader;
 
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +23,7 @@ public class Uploader {
 			state = Base64Uploader.save(this.request.getParameter(filedName),
 					this.conf);
 		} else {
-			state = com.baidu.ueditorTest.upload.BinaryUploader.save(this.request, this.conf);
+			state = com.baidu.ueditor.upload.BinaryUploader.save(this.request, this.conf);
 		}
 
 		return state;

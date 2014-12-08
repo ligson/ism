@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.baidu.ueditorTest.Encoder;
-import com.baidu.ueditorTest.define.AppInfo;
-import com.baidu.ueditorTest.define.State;
+import com.baidu.ueditor.Encoder;
+import com.baidu.ueditor.define.AppInfo;
+import com.baidu.ueditor.define.State;
 
 public class BaseState implements State {
 
@@ -30,7 +30,7 @@ public class BaseState implements State {
 	
 	public BaseState ( boolean state, int infoCode ) {
 		this.setState( state );
-		this.info = com.baidu.ueditorTest.define.AppInfo.getStateInfo(infoCode);
+		this.info = com.baidu.ueditor.define.AppInfo.getStateInfo(infoCode);
 	}
 	
 	public boolean isSuccess () {

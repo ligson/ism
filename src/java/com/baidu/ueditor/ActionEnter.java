@@ -4,14 +4,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.baidu.ueditorTest.ConfigManager;
-import com.baidu.ueditorTest.define.ActionMap;
-import com.baidu.ueditorTest.define.AppInfo;
-import com.baidu.ueditorTest.define.BaseState;
-import com.baidu.ueditorTest.define.State;
-import com.baidu.ueditorTest.hunter.FileManager;
-import com.baidu.ueditorTest.hunter.ImageHunter;
-import com.baidu.ueditorTest.upload.Uploader;
+import com.baidu.ueditor.ConfigManager;
+import com.baidu.ueditor.define.ActionMap;
+import com.baidu.ueditor.define.AppInfo;
+import com.baidu.ueditor.define.BaseState;
+import com.baidu.ueditor.define.State;
+import com.baidu.ueditor.hunter.FileManager;
+import com.baidu.ueditor.hunter.ImageHunter;
+import com.baidu.ueditor.upload.Uploader;
 
 public class ActionEnter {
 	
@@ -22,7 +22,7 @@ public class ActionEnter {
 	
 	private String actionType = null;
 	
-	private com.baidu.ueditorTest.ConfigManager configManager = null;
+	private com.baidu.ueditor.ConfigManager configManager = null;
 
 	public ActionEnter ( HttpServletRequest request, String rootPath ) {
 		

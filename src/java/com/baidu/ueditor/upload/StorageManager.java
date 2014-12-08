@@ -1,8 +1,9 @@
 package com.baidu.ueditor.upload;
 
-import com.baidu.ueditorTest.define.AppInfo;
-import com.baidu.ueditorTest.define.BaseState;
-import com.baidu.ueditorTest.define.State;
+import com.baidu.ueditor.define.State;
+import com.baidu.ueditor.define.AppInfo;
+import com.baidu.ueditor.define.BaseState;
+import com.baidu.ueditor.define.State;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
