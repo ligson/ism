@@ -1,7 +1,7 @@
 package com.ism.admin.controllers
 
 import com.ism.goods.domains.Goods
-import com.ism.user.domains.User
+import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONArray
 
 class GoodsMgrController {
@@ -18,17 +18,26 @@ class GoodsMgrController {
         int number = Integer.parseInt((rows == null || rows == "0") ? "10":rows);
         //每页的开始记录  第一页为1  第二页为number +1
         int start = (intPage-1)*number;
-        List<User> list=null;
-        int total=User.findAll().size();
+        List<Goods> list=null;
+        int total=Goods.findAll().size();
         if(total>0){
-            list=User.findAll();
+            list=Goods.findAll();
         }
         Map<String, Object> jsonMap = new HashMap<String, Object>();//定义map
         jsonMap.put("total", total);//total键 存放总记录数，必须的
         jsonMap.put("rows", list);//rows键 存放每页记录 list
-         render(contentType: "text/json"){return jsonMap};
+        def res = [];
+        list.each {
+            def tmp = [:];
+            tmp.id= it.id;
+            tmp.name = it.name;
+            tmp.market = it.market;
+            tmp.remark = it.remark;
+            tmp.city = it.city;
+            res.add(tmp);
+        }
+        return render(res as JSON);
     }
-
     def goodList(){
 
     }

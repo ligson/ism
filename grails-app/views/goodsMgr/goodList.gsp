@@ -1,87 +1,74 @@
-<!DOCTYPE html>
+<%@ page import="com.ism.market.domains.Market" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>商品管理</title>
+    <title>超市管理</title>
+    <script type="text/javascript" src="${resource(dir: "js/ism/admin", file: "cityMgr.js")}"></script>
+    <ueditor:resources/>
+
 </head>
 <body>
-
-<table id="list_data" cellspacing="0" cellpadding="0">
-    <thead>
-    <tr>
-        <th field="id" width="100">ID</th>
-        <th field="cellphone" width="100">部门</th>
-        <th field="password" width="100">网站</th>
-        <th field="email" width="100">名称</th>
-        <th field="nickName" width="100">管理员</th>
-    </tr>
-    </thead>
-</table>
+<div id="list_data"></div>
 <div id="dlg" class="easyui-dialog" style="width: 400px; height: 280px; padding: 10px 20px;"
      closed="true" buttons="#dlg-buttons">
     <div class="ftitle">
-        信息编辑
+
     </div>
-    <form id="fm" method="post">
+     <form id="fm" method="post">
         <div class="fitem">
-            <label>
-                昵称
+            <label style="width:100px;">
+                选择地区</label>
+            <input class="easyui-combotree" id="cid" name="cid" data-options="url:'cityList',method:'get',required:true" style="width:200px;">
+        </div>
+        <div class="fitem">
+            <label style="width:100px;">
+                选择超市
             </label>
-            <input name="nickName" class="easyui-validatebox" required="true" />
+            <input name="mid"  class="easyui-validatebox" required="true" style="width:200px;"/>
         </div>
         <div class="fitem">
-            <label>
-                手机号</label>
-            <input name="cellphone" class="easyui-validatebox" required="true" />
+            <label style="width:100px;">
+                商品名称
+            </label>
+            <input name="name" id="name" class="easyui-validatebox" required="true" style="width:200px;"/>
         </div>
         <div class="fitem">
-            <label>
-                电子邮件</label>
-            <input name="email" class="easyui-vlidatebox" />
+            <label style="width:100px;">
+                商品内容
+            </label>
+            <ueditor:editor id="content" style="width:100%;height:360px;">Hello World</ueditor:editor>
+
         </div>
         <div class="fitem">
-            <label>
-                密码</label>
-            <input name="password" class="easyui-validatebox" required="true" />
-        </div>
-        <div class="fitem">
-            <label>
-                性别</label>
-            <input name="sex" class="easyui-vlidatebox" />
-        </div>
-        <div class="fitem">
-            <label>
-                生日</label>
-            <input name="birth" class="easyui-vlidatebox" />
-        </div>
-        <div class="fitem">
-            <label>
-                用户头像</label>
-            <input name="photo" class="easyui-vlidatebox" />
-        </div>
-        <div class="fitem">
-            <label>
-                创建时间</label>
-            <input name="CreateTime" class="easyui-datebox" required="true" />
-        </div>
-        <div class="fitem">
-            <label>
-                创建人</label>
-            <input name="CreateName" class="easyui-vlidatebox" />
+            <label style="width:100px;">
+                备注
+            </label>
+            <input name="remark"  class="easyui-validatebox" required="true" style="width:200px;"/>
         </div>
         <input type="hidden" name="action" id="hidtype" />
-        <input type="hidden" name="ID" id="Nameid" />
     </form>
 </div>
-?<div id="dlg-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="saveuser()" iconcls="icon-save">保存</a>
+<div id="dlg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="save()" iconcls="icon-save">保存</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')"
        iconcls="icon-cancel">取消</a>
 </div>
 
 <script type="text/javascript">
     //datagrid初始化
-    $('#list_data').datagrid({
+    var datagrid=$('#list_data').datagrid({
+        columns:[[
+            {field:'id',title:'ID',width:'20%',align:'center'},
+            {field:'city',title:'所在地区',width:'20%',align:'center',formatter:function(value){
+                return value.name;
+            }},
+            {field:'market',title:'所在地区',width:'20%',align:'center',formatter:function(value){
+                return value.name;
+            }},
+            {field:'name',title:'超市名称',width:'20%',align:'center'},
+            {field:'remark',title:'备注',width:'20%',align:'center'},
+            {field:'sendTime',title:'发布时间',width:'20%',align:'center'}
+        ]],
         title:'商品管理',
         iconCls:'icon-edit',//图标
         width: 700,
@@ -96,7 +83,7 @@
         //sortOrder: 'desc',
         remoteSort:false,
         idField:'fldId',
-        singleSelect:false,//是否单选
+        singleSelect:true,//是否单选
         pagination:true,//分页控件
         rownumbers:true,//行号
         frozenColumns:[[
@@ -106,19 +93,19 @@
             text: '添加',
             iconCls: 'icon-add',
             handler: function() {
-                newuser();
+                addMarket();
             }
         }, '-', {
             text: '修改',
             iconCls: 'icon-edit',
             handler: function() {
-                edituser();
+                updateMarket();
             }
         }, '-',{
             text: '删除',
             iconCls: 'icon-remove',
             handler: function(){
-                alert("删除");
+                removeMarket();
             }
         }]
     });
@@ -138,31 +125,46 @@
     });
     var url;
     var type;
-    function newuser() {
-        $("#dlg").dialog("open").dialog('setTitle', '新增超市'); ;
+    function addMarket() {
+        var $win;
+        $win = $('#dlg').window({
+            title: '添加商品信息',
+            width: 820,
+            height: 650,
+            shadow: true,
+            modal: true,
+            iconCls: 'icon-add',
+            closed: true,
+            minimizable: true,
+            maximizable: true,
+            maximized:true,
+            collapsible: true
+        });
+        $win.window('open');
         $("#fm").form("clear");
         url = "addMarket";
         $("#hidtype").val("submit");
     }
-    function edituser() {
-        var row = $("#dg").datagrid("getSelected");
+    function updateMarket() {
+        var row = datagrid.datagrid("getSelected");
         if (row) {
-            $("#dlg").dialog("open").dialog('setTitle', 'Edit User');
+            $("#dlg").dialog("open").dialog('setTitle', '编辑超市');
             $("#fm").form("load", row);
-            url = "UserManage.aspx?id=" + row.ID;
+            url = "updateMarket?id=" + row.id;
         }
     }
-    function saveuser() {
+    function save() {
         $("#fm").form("submit", {
             url: url,
             onsubmit: function () {
                 return $(this).form("validate");
             },
             success: function (result) {
-                if (result == "1") {
+                data = eval("(" + result + ")");
+                if (data.success) {
                     $.messager.alert("提示信息", "操作成功");
                     $("#dlg").dialog("close");
-                    $("#dg").datagrid("load");
+                    datagrid.datagrid("reload");
                 }
                 else {
                     $.messager.alert("提示信息", "操作失败");
@@ -170,18 +172,18 @@
             }
         });
     }
-    function destroyUser() {
-        var row = $('#dg').datagrid('getSelected');
+    function removeMarket() {
+        var row = datagrid.datagrid('getSelected');
         if (row) {
-            $.messager.confirm('Confirm', 'Are you sure you want to destroy this user?', function (r) {
+            $.messager.confirm('提示', '确定要删除选择的数据吗?', function (r) {
                 if (r) {
-                    $.post('destroy_user.php', { id: row.id }, function (result) {
+                    $.post('removeMarket', { id: row.id }, function (result) {
                         if (result.success) {
-                            $('#dg').datagrid('reload');    // reload the user data
+                            datagrid.datagrid("reload");    // reload the user data
                         } else {
                             $.messager.show({   // show error message
                                 title: 'Error',
-                                msg: result.errorMsg
+                                msg:"操作失败"
                             });
                         }
                     }, 'json');
