@@ -17,9 +17,8 @@ class GoodService implements IGoodService {
     Map addGood(Map params) {
         def result = [:];
         def good=new Goods(params);
-
-        //def market=Market.findById(params.mid);
-        //goods.setMarket(market);
+        def market=Market.findById(params.mid);
+        good.setMarket(market);
         if (good.save(flush: true)) {
             result.success = true;
             result.msg = "保存成功";
@@ -35,7 +34,8 @@ class GoodService implements IGoodService {
         def result=[:];
         def good=Goods.findById(params.id);
         good.category=params.category;
-        good.market=params.market;
+        def market=Market.findById(params.mid);
+        good.market=market;
         good.no=params.no;
         good.name=params.name;
         good.remark=params.remark;

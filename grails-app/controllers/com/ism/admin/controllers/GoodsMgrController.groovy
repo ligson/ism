@@ -13,6 +13,10 @@ class GoodsMgrController {
     def index() {
         return render(view: "index");
     }
+    /**
+     * 商品列表
+     * @return
+     */
     def list(){
         JSONArray result;//返回的json
         def page=params.page;
@@ -37,6 +41,7 @@ class GoodsMgrController {
             tmp.name = it.name;
             tmp.no = it.no;
             tmp.market = it.market;
+            tmp.mid=it.market.id;
             tmp.remark = it.remark;
             res.add(tmp);
         }

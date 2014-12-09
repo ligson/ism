@@ -24,7 +24,7 @@
             <label style="width:100px;">
                 选择超市
             </label>
-            <input name="mid" class="easyui-combobox"  data-options="valueField:'no',textField:'name',url:'getMarketListJson'"  style="width:200px;">
+            <input name="mid" class="easyui-combobox"  data-options="valueField:'id',textField:'name',url:'getMarketListJson'"  style="width:200px;">
         </div>
         <div class="fitem">
             <label style="width:100px;">
@@ -68,7 +68,9 @@
            /* {field:'city',title:'所在地区',width:'20%',align:'center',formatter:function(value){
                 return value.name;
             }},*/
-            {field:'market',title:'超市名称',width:'20%',align:'center'},
+            {field:'market',title:'超市名称',width:'20%',align:'center',formatter:function(value){
+                return value.name;
+            }},
             {field:'name',title:'商品名称',width:'20%',align:'center'},
             {field:'no',title:'商品名称',width:'20%',align:'center'},
             {field:'remark',title:'备注',width:'20%',align:'center'},
