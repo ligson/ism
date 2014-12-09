@@ -30,19 +30,19 @@
             <label style="width:100px;">
                 商品名称
             </label>
-            <input name="gdname"  class="easyui-validatebox" required="true" style="width:200px;"/>
+            <input name="name"  class="easyui-validatebox" required="true" style="width:200px;"/>
         </div>
          <div class="fitem">
              <label style="width:100px;">
                  商品编号
              </label>
-             <input name="gdno"  class="easyui-validatebox" required="true" style="width:200px;"/>
+             <input name="no"  class="easyui-validatebox" required="true" style="width:200px;"/>
          </div>
         <div class="fitem">
             <label style="width:100px;">
                 商品内容
             </label>
-            <ueditor:editor id="content"  style="width:100%;height:360px;">Hello World</ueditor:editor>
+            <ueditor:editor id="content" name="content" style="width:100%;height:360px;">Hello World</ueditor:editor>
 
         </div>
         <div class="fitem">
@@ -184,6 +184,7 @@
                 if (r) {
                     $.post('removeGood', { id: row.id }, function (result) {
                         if (result.success) {
+                            $.messager.alert("提示信息", "删除成功");
                             datagrid.datagrid("reload");    // reload the user data
                         } else {
                             $.messager.show({   // show error message

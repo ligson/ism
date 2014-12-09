@@ -31,8 +31,8 @@ class GoodsMgrController {
         list.each {
             def tmp = [:];
             tmp.id= it.id;
-            tmp.name = it.gdname;
-            tmp.no = it.gdno;
+            tmp.name = it.name;
+            tmp.no = it.no;
             tmp.market = it.market;
             tmp.remark = it.remark;
             res.add(tmp);

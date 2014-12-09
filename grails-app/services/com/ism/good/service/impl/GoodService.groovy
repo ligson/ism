@@ -17,7 +17,7 @@ class GoodService implements IGoodService {
     Map addGood(Map params) {
         def result = [:];
         def good=new Goods(params);
-        good.content=params.editorValue;
+
         //def market=Market.findById(params.mid);
         //goods.setMarket(market);
         if (good.save(flush: true)) {
@@ -27,18 +27,19 @@ class GoodService implements IGoodService {
         return result;
     }
     /**
-     * 更新超市
+     * 更新商品
      * @param params
      * @return
      */
-    Map updateMarket(Map params){
+    Map updateGood(Map params){
         def result=[:];
         def good=Goods.findById(params.id);
-        good.gdname=params.gdname;
+        good.category=params.category;
+        good.market=params.market;
+        good.no=params.no;
+        good.name=params.name;
         good.remark=params.remark;
         good.content=params.content;
-        //Market market=Market.findById(params.mid);
-       // good.market=market;
         if (good.save(flush: true)) {
             result.success = true;
         } else {
@@ -48,11 +49,11 @@ class GoodService implements IGoodService {
         return result;
     }
     /**
-     * 删除超市
+     * 删除商品
      * @param params
      * @return
      */
-    Map removeMarket(Map params){
+    Map removeGood(Map params){
         def result=[:];
         Goods goods=Goods.findById(params.id);
         if(goods){
