@@ -9,11 +9,21 @@ import com.ism.order.domains.Order
 class Goods {
     Category category;
     Market market;
-    String gdId;//商品ID
+    String gdno;//商品编号
     String gdname;//商品名称
     String content;//商品简介
     String remark;//备注
     static hasMany = [orders:Order]
     static constraints = {
+        category(nullable: true)
+        gdno(nullable: true)
+        content(nullable: true,maxsize:10000 )
+        gdname(nullable: true)
+        remark(nullable: true)
+        market(nullable: true)
     }
+    static mapping = {
+        content(type: "text")
+    }
+
 }

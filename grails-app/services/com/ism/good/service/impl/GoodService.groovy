@@ -1,5 +1,6 @@
 package com.ism.good.service.impl
 
+import com.ism.address.domains.City
 import com.ism.good.service.IGoodService
 import com.ism.goods.domains.Goods
 import com.ism.market.domains.Market
@@ -8,29 +9,57 @@ import grails.transaction.Transactional
 
 @Transactional
 class GoodService implements IGoodService {
-    def marketService;
     /**
      * 新增商品
      * @param params
      * @return
      */
-    Map add(Map params) {
+    Map addGood(Map params) {
         def result = [:];
-        String gdId=params.gdId;
-        String gdname=params.gdname;
-        String content=params.content;
-        String remark=params.remark;
-        String marketId=params.marketId;
-        Goods goods=new Goods();
-        goods.setGdId(gdId);
-        goods.setGdname(gdname);
-        goods.setContent(content);
-        goods.setRemark(remark);
-        Market market=Market.findById(marketId);
-        goods.setMarket(market);
-        if (goods.save(flush: true)) {
+        def good=new Goods(params);
+        good.content=params.editorValue;
+        //def market=Market.findById(params.mid);
+        //goods.setMarket(market);
+        if (good.save(flush: true)) {
             result.success = true;
             result.msg = "保存成功";
+        }
+        return result;
+    }
+    /**
+     * 更新超市
+     * @param params
+     * @return
+     */
+    Map updateMarket(Map params){
+        def result=[:];
+        def good=Goods.findById(params.id);
+        good.gdname=params.gdname;
+        good.remark=params.remark;
+        good.content=params.content;
+        //Market market=Market.findById(params.mid);
+       // good.market=market;
+        if (good.save(flush: true)) {
+            result.success = true;
+        } else {
+            result.success = false;
+            result.msg = "保存失败!";
+        }
+        return result;
+    }
+    /**
+     * 删除超市
+     * @param params
+     * @return
+     */
+    Map removeMarket(Map params){
+        def result=[:];
+        Goods goods=Goods.findById(params.id);
+        if(goods){
+            goods.delete(flush:true)
+            result.success = true;
+        }else{
+            result.success=false;
         }
         return result;
     }

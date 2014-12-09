@@ -18,7 +18,7 @@
         <div class="fitem">
             <label style="width:100px;">
                 选择地区</label>
-            <input class="easyui-combotree" id="cid" name="cid" data-options="url:'cityList',method:'get',required:true" style="width:200px;">
+            <input class="easyui-combotree"  name="cid" data-options="url:'cityList',method:'get',required:true" style="width:200px;">
         </div>
         <div class="fitem">
             <label style="width:100px;">
@@ -30,13 +30,19 @@
             <label style="width:100px;">
                 商品名称
             </label>
-            <input name="name" id="name" class="easyui-validatebox" required="true" style="width:200px;"/>
+            <input name="gdname"  class="easyui-validatebox" required="true" style="width:200px;"/>
         </div>
+         <div class="fitem">
+             <label style="width:100px;">
+                 商品编号
+             </label>
+             <input name="gdno"  class="easyui-validatebox" required="true" style="width:200px;"/>
+         </div>
         <div class="fitem">
             <label style="width:100px;">
                 商品内容
             </label>
-            <ueditor:editor id="content" style="width:100%;height:360px;">Hello World</ueditor:editor>
+            <ueditor:editor id="content"  style="width:100%;height:360px;">Hello World</ueditor:editor>
 
         </div>
         <div class="fitem">
@@ -59,13 +65,12 @@
     var datagrid=$('#list_data').datagrid({
         columns:[[
             {field:'id',title:'ID',width:'20%',align:'center'},
-            {field:'city',title:'所在地区',width:'20%',align:'center',formatter:function(value){
+           /* {field:'city',title:'所在地区',width:'20%',align:'center',formatter:function(value){
                 return value.name;
-            }},
-            {field:'market',title:'所在地区',width:'20%',align:'center',formatter:function(value){
-                return value.name;
-            }},
-            {field:'name',title:'超市名称',width:'20%',align:'center'},
+            }},*/
+            {field:'market',title:'超市名称',width:'20%',align:'center'},
+            {field:'name',title:'商品名称',width:'20%',align:'center'},
+            {field:'no',title:'商品名称',width:'20%',align:'center'},
             {field:'remark',title:'备注',width:'20%',align:'center'},
             {field:'sendTime',title:'发布时间',width:'20%',align:'center'}
         ]],
@@ -93,19 +98,19 @@
             text: '添加',
             iconCls: 'icon-add',
             handler: function() {
-                addMarket();
+                addGood();
             }
         }, '-', {
             text: '修改',
             iconCls: 'icon-edit',
             handler: function() {
-                updateMarket();
+                updateGood();
             }
         }, '-',{
             text: '删除',
             iconCls: 'icon-remove',
             handler: function(){
-                removeMarket();
+                removeGood();
             }
         }]
     });
@@ -125,7 +130,7 @@
     });
     var url;
     var type;
-    function addMarket() {
+    function addGood() {
         var $win;
         $win = $('#dlg').window({
             title: '添加商品信息',
@@ -142,15 +147,15 @@
         });
         $win.window('open');
         $("#fm").form("clear");
-        url = "addMarket";
+        url = "addGood";
         $("#hidtype").val("submit");
     }
-    function updateMarket() {
+    function updateGood() {
         var row = datagrid.datagrid("getSelected");
         if (row) {
             $("#dlg").dialog("open").dialog('setTitle', '编辑超市');
             $("#fm").form("load", row);
-            url = "updateMarket?id=" + row.id;
+            url = "updateGood?id=" + row.id;
         }
     }
     function save() {
@@ -172,12 +177,12 @@
             }
         });
     }
-    function removeMarket() {
+    function removeGood() {
         var row = datagrid.datagrid('getSelected');
         if (row) {
             $.messager.confirm('提示', '确定要删除选择的数据吗?', function (r) {
                 if (r) {
-                    $.post('removeMarket', { id: row.id }, function (result) {
+                    $.post('removeGood', { id: row.id }, function (result) {
                         if (result.success) {
                             datagrid.datagrid("reload");    // reload the user data
                         } else {

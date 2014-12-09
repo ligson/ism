@@ -1,11 +1,12 @@
 package com.ism.admin.controllers
 
+import com.ism.address.domains.City
 import com.ism.goods.domains.Goods
 import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONArray
 
 class GoodsMgrController {
-    def marketService;
+    def goodService;
     def index() {
         return render(view: "index");
     }
@@ -30,10 +31,10 @@ class GoodsMgrController {
         list.each {
             def tmp = [:];
             tmp.id= it.id;
-            tmp.name = it.name;
+            tmp.name = it.gdname;
+            tmp.no = it.gdno;
             tmp.market = it.market;
             tmp.remark = it.remark;
-            tmp.city = it.city;
             res.add(tmp);
         }
         return render(res as JSON);
@@ -44,8 +45,49 @@ class GoodsMgrController {
     /**
      * 新增超市
      */
-    def addMarket(){
-        marketService.addMarket(params);
+    def addGood() {
+        def result=goodService.addGood(params);
+        return render(result as JSON);
     }
+    /**
+     * 编辑超市
+     * @return
+     */
+    def updateGood(){
+        def result=goodService.updateGood(params);
+        return render(result as JSON);
+    }
+    /**
+     * 删除超市
+     */
+    def removeGood(){
+        def result=goodService.removeGood(params);
+        return render(result as JSON);
+    }
+    def cityList() {
+        List<City> cities = [];
+        if (params.id) {
+            City father = City.findById(params.id);
+            if (father) {
+                cities = City.findAllByFatherCity(father);
+            } else {
+                cities = [];
+            }
 
+        } else {
+            cities = City.findAllByFatherCityIsNull();
+        }
+        def result = [];
+        cities.each {
+            def tmp = [:];
+            tmp.id = it.id;
+            tmp.text = it.name;
+            tmp.level = it.level;
+            tmp.code = it.code;
+            tmp.description = it.description;
+            tmp.state = "closed";
+            result.add(tmp);
+        }
+        return render(result as JSON)
+    }
 }
