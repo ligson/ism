@@ -28,7 +28,7 @@
         <div title="分类管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
             <ul class="easyui-tree">
                 <li>
-                    <a href="#">分类列表</a>
+                    <a href="${createLink(controller:'goodsMgr',action:'categoryList')}">分类列表</a>
                 </li>
             </ul>
         </div>

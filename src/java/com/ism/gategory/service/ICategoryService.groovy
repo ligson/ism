@@ -1,26 +1,22 @@
-package com.ism.good.service
-
-import grails.converters.JSON
-
+package com.ism.gategory.service
 /**
  * Created by ZhengYunFei on 2014/11/27.
  */
-interface IGoodService {
+interface ICategoryService {
     public interface IOrderService {
         /**
          * 新增分类
          */
-        def addGood(Map params);
+        def addCategory(Map params);
         /**
          * 编辑分类
-         * @return
          */
 
-        def updateGood(Map params);
+        def updateCategory(Map params);
 
         /**
          * 删除分类
          */
-        def removeGood(Map params);
+        def removeCategory(Map params);
     }
 }

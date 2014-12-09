@@ -2,11 +2,13 @@ package com.ism.admin.controllers
 
 import com.ism.address.domains.City
 import com.ism.goods.domains.Goods
+import com.ism.goods.domains.Category
 import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONArray
 
 class GoodsMgrController {
     def goodService;
+    def categoryService;
     def index() {
         return render(view: "index");
     }
@@ -42,6 +44,7 @@ class GoodsMgrController {
     def goodList(){
 
     }
+    def categoryList(){}
     /**
      * 新增超市
      */
@@ -89,5 +92,58 @@ class GoodsMgrController {
             result.add(tmp);
         }
         return render(result as JSON)
+    }
+    def categoryListAjax(){
+            JSONArray result;//返回的json
+            def page=params.page;
+            def rows=params.rows;
+            int intPage = Integer.parseInt((page == null || page == "0") ? "1":page);
+            //每页显示条数
+            int number = Integer.parseInt((rows == null || rows == "0") ? "10":rows);
+            //每页的开始记录  第一页为1  第二页为number +1
+            int start = (intPage-1)*number;
+            List<Category> list=null;
+            int total=Category.findAll().size();
+            if(total>0){
+                list=Category.findAll();
+            }
+            Map<String, Object> jsonMap = new HashMap<String, Object>();//定义map
+            jsonMap.put("total", total);//total键 存放总记录数，必须的
+            jsonMap.put("rows", list);//rows键 存放每页记录 list
+            def res = [];
+            list.each {
+                def tmp = [:];
+                tmp.id= it.id;
+                tmp.name= it.name;
+                tmp.no = it.no;
+                tmp.displayNum = it.displayNum;
+                tmp.goodses = it.goodses;
+                tmp.sortType = it.sortType;
+                tmp.validFlag = it.validFlag;
+                res.add(tmp);
+            }
+            return render(res as JSON);
+        }
+/**
+ * 新增分类
+ */
+    def addCategory() {
+        def result=categoryService.addCategory(params);
+        return render(result as JSON);
+    }
+    /**
+     * 编辑分类
+     * @return
+     */
+    def updateCategory(){
+        def result=categoryService.updateCategory(params);
+        return render(result as JSON);
+    }
+    /**
+     * 删除分类
+     */
+    def removeCategory(){
+        def result=categoryService.removeCategory(params);
+        return render(result as JSON);
     }
 }
