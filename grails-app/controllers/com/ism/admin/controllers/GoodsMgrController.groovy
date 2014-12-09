@@ -52,7 +52,11 @@ class GoodsMgrController {
         JSONArray result;//返回的json
         List<Market> list=null;
         City city=City.findById(params.cid);
-        list=Market.findAllByCity(city);
+        if(city){
+            list=Market.findAllByCity(city);
+        }else{
+            list=Market.findAll();
+        }
         def res = [];
         list.each {
             def tmp = [:];
@@ -146,7 +150,7 @@ class GoodsMgrController {
                 tmp.no = it.no;
                 tmp.displayNum = it.displayNum;
                 tmp.market = it.market;
-                tmp.mid=it.market.id;
+                tmp.marketId=it.market.id;
                 tmp.goodses = it.goodses;
                 tmp.sortType = it.sortType;
                 tmp.validFlag = it.validFlag;

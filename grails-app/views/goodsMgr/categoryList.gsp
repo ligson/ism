@@ -160,6 +160,7 @@
     function updateCategory() {
         var row = datagrid.datagrid("getSelected");
         if (row) {
+            $('#mid').combobox('select', row.marketId);
             $("#dlg").dialog("open").dialog('setTitle', '编辑分类');
             $("#fm").form("load", row);
             url = "updateCategory?id=" + row.id;
