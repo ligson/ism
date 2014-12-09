@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>分类管理</title>
-    <script type="text/javascript" src="${resource(dir: "js/ism/admin", file: "cityMgr.js")}"></script>
 </head>
 <body>
 <div id="list_data"></div>
