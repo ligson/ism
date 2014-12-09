@@ -18,14 +18,20 @@
         <div class="fitem">
             <label style="width:100px;">
                 选择地区</label>
-            <input class="easyui-combotree"  name="cid" data-options="url:'cityList',method:'get',required:true" style="width:200px;">
+            <input class="easyui-combotree" id="cid"  name="cid" data-options="url:'cityList',method:'get',required:true" style="width:200px;">
         </div>
         <div class="fitem">
             <label style="width:100px;">
                 选择超市
             </label>
-            <input name="mid" class="easyui-combobox"  data-options="valueField:'id',textField:'name',url:'getMarketListJson'"  style="width:200px;">
+            <input name="mid" id="mid" class="easyui-combobox"  data-options="valueField:'id',textField:'name',url:'',required:true"  style="width:200px;">
         </div>
+         <div class="fitem">
+             <label style="width:100px;">
+                 选择分类
+             </label>
+             <input name="categoryId" id="categoryId" class="easyui-combobox"  data-options="valueField:'id',textField:'name',url:'',required:true"  style="width:200px;">
+         </div>
         <div class="fitem">
             <label style="width:100px;">
                 商品名称
@@ -61,6 +67,7 @@
 </div>
 
 <script type="text/javascript">
+
     //datagrid初始化
     var datagrid=$('#list_data').datagrid({
         columns:[[
@@ -132,6 +139,24 @@
     });
     var url;
     var type;
+    //地区，超市，分类联动
+    function linkSelect() {
+        $("#cid").combotree({
+            onSelect: function (value) {
+                var cid = value.id;
+                var url = "getMarketListJson?cid=" + cid;
+                $('#mid').combobox('reload', url);  // 使用新的URL重新载入列表数据
+            }
+
+        });
+        $("#mid").combobox({
+            onSelect: function (value) {
+                var mid = value.id;
+                var url = "getCategoryListJson?mid=" + mid;
+                $("#categoryId").combobox('reload', url);
+            }
+        });
+    }
     function addGood() {
         var $win;
         $win = $('#dlg').window({
@@ -147,6 +172,7 @@
             maximized:true,
             collapsible: true
         });
+        linkSelect();
         $win.window('open');
         $("#fm").form("clear");
         url = "addGood";
@@ -154,6 +180,7 @@
     }
     function updateGood() {
         var row = datagrid.datagrid("getSelected");
+        linkSelect();
         if (row) {
             $("#dlg").dialog("open").dialog('setTitle', '编辑超市');
             $("#fm").form("load", row);
@@ -199,6 +226,13 @@
             });
         }
     }
+
+    $(document).ready(function () {
+
+
+
+    });
+
 
 </script>
 </body>

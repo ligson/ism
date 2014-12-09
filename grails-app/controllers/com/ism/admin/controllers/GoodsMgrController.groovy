@@ -51,10 +51,8 @@ class GoodsMgrController {
     def getMarketListJson() {
         JSONArray result;//返回的json
         List<Market> list=null;
-        int total=Market.findAll().size();
-        if(total>0){
-            list=Market.findAll();
-        }
+        City city=City.findById(params.cid);
+        list=Market.findAllByCity(city);
         def res = [];
         list.each {
             def tmp = [:];
@@ -119,6 +117,10 @@ class GoodsMgrController {
         }
         return render(result as JSON)
     }
+    /**
+     * 分类列表
+     * @return
+     */
     def categoryAjaxList(){
             JSONArray result;//返回的json
             def page=params.page;
@@ -152,6 +154,30 @@ class GoodsMgrController {
             }
             return render(res as JSON);
         }
+    /**
+     * 根据超市查询超市分类列表
+     */
+    def getCategoryListJson(){
+        JSONArray result;//返回的json
+        List<Category> list=null;
+        Market market=Market.findById(params.mid);
+        list=Category.findAllByMarket(market);
+        def res = [];
+        list.each {
+            def tmp = [:];
+            tmp.id= it.id;
+            tmp.name= it.name;
+            tmp.no = it.no;
+            tmp.displayNum = it.displayNum;
+            tmp.market = it.market;
+            tmp.mid=it.market.id;
+            tmp.goodses = it.goodses;
+            tmp.sortType = it.sortType;
+            tmp.validFlag = it.validFlag;
+            res.add(tmp);
+        }
+        return render(res as JSON);
+    }
 /**
  * 新增分类
  */
