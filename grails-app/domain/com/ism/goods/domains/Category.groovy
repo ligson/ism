@@ -13,8 +13,8 @@ class Category {
     String name;//分类名称
     String no;//分类编号
     String sortType;//分类类型
-    boolean validFlag;//是否有效
-    int displayNum;//显示序号
+    String validFlag;//是否有效
+    String displayNum;//显示序号
     static constraints = {
         market(nullable: true)
         name(nullable: true)

@@ -3,6 +3,7 @@ package com.ism.admin.controllers
 import com.ism.address.domains.City
 import com.ism.goods.domains.Goods
 import com.ism.goods.domains.Category
+import com.ism.market.domains.Market
 import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONArray
 
@@ -37,6 +38,26 @@ class GoodsMgrController {
             tmp.no = it.no;
             tmp.market = it.market;
             tmp.remark = it.remark;
+            res.add(tmp);
+        }
+        return render(res as JSON);
+    }
+    //获取超市列表json（为combox使用）
+    def getMarketListJson() {
+        JSONArray result;//返回的json
+        List<Market> list=null;
+        int total=Market.findAll().size();
+        if(total>0){
+            list=Market.findAll();
+        }
+        def res = [];
+        list.each {
+            def tmp = [:];
+            tmp.id= it.id;
+            tmp.name = it.name;
+            tmp.accessTime = it.accessTime;
+            tmp.state = it.state;
+            tmp.city = it.city;
             res.add(tmp);
         }
         return render(res as JSON);
@@ -93,7 +114,7 @@ class GoodsMgrController {
         }
         return render(result as JSON)
     }
-    def categoryListAjax(){
+    def categoryAjaxList(){
             JSONArray result;//返回的json
             def page=params.page;
             def rows=params.rows;
@@ -117,6 +138,8 @@ class GoodsMgrController {
                 tmp.name= it.name;
                 tmp.no = it.no;
                 tmp.displayNum = it.displayNum;
+                tmp.market = it.market;
+                tmp.mid=it.market.id;
                 tmp.goodses = it.goodses;
                 tmp.sortType = it.sortType;
                 tmp.validFlag = it.validFlag;

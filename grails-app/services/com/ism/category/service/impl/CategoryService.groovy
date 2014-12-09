@@ -3,6 +3,7 @@ package com.ism.category.service.impl
 import com.ism.good.service.IGoodService
 import com.ism.goods.domains.Category
 import com.ism.goods.domains.Goods
+import com.ism.market.domains.Market
 import grails.transaction.Transactional
 
 @Transactional
@@ -16,6 +17,8 @@ class CategoryService implements IGoodService {
     Map addCategory(Map params) {
         def result = [:];
         def category=new Category(params);
+        Market market=Market.findById(params.mid);
+        category.setMarket(market);
         if (category.save(flush: true)) {
             result.success = true;
             result.msg = "保存成功";
@@ -33,7 +36,8 @@ class CategoryService implements IGoodService {
         def category=Category.findById(params.id);
         category.name=params.name;
         category.no=params.no;
-        category.market=params.market;
+        Market market=Market.findById(params.mid);
+        category.market=market;
         category.validFlag=params.validFlag;
         category.sortType=params.sortType;
         category.displayNum=params.displayNum;

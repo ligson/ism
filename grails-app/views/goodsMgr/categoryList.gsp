@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <title>分类管理</title>
     <script type="text/javascript" src="${resource(dir: "js/ism/admin", file: "cityMgr.js")}"></script>
-    <ueditor:resources/>
-
 </head>
 <body>
 <div id="list_data"></div>
@@ -19,7 +17,7 @@
              <label style="width:100px;">
                  选择超市
              </label>
-             <input name="mid"  class="easyui-validatebox" required="true" style="width:200px;"/>
+             <input name="mid" class="easyui-combobox"  data-options="valueField:'id',textField:'name',url:'getMarketListJson'"  style="width:200px;">
          </div>
         <div class="fitem">
             <label style="width:100px;">
@@ -68,15 +66,20 @@
     var datagrid=$('#list_data').datagrid({
         columns:[[
             {field:'id',title:'ID',width:'20%',align:'center'},
-           /* {field:'city',title:'所在地区',width:'20%',align:'center',formatter:function(value){
+            {field:'market',title:'超市',width:'20%',align:'center',formatter:function(value){
                 return value.name;
-            }},*/
-            {field:'market',title:'超市名称',width:'20%',align:'center'},
+            }},
             {field:'name',title:'分类名称',width:'20%',align:'center'},
             {field:'no',title:'分类编码',width:'20%',align:'center'},
             {field:'sortType',title:'类型',width:'20%',align:'center'},
             {field:'displayNum',title:'显示序号',width:'20%',align:'center'},
-            {field:'validFlag',title:'有效标识',width:'20%',align:'center'}
+            {field:'validFlag',title:'有效标识',width:'20%',align:'center',formatter:function(value){
+                if(value=="0"){
+                    return "禁用";
+                }else if(value=="1"){
+                    return "启用";
+                }
+            }}
         ]],
         title:'分类管理',
         iconCls:'icon-edit',//图标
@@ -87,7 +90,7 @@
         border: true,
         collapsible:true,//是否可折叠的
         fit: true,//自动大小
-        url:'categoryListAjax',
+        url:'categoryAjaxList',
         //sortName: 'code',
         //sortOrder: 'desc',
         remoteSort:false,

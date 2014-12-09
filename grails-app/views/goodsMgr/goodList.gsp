@@ -24,7 +24,7 @@
             <label style="width:100px;">
                 选择超市
             </label>
-            <input name="mid"  class="easyui-validatebox" required="true" style="width:200px;"/>
+            <input name="mid" class="easyui-combobox"  data-options="valueField:'no',textField:'name',url:'getMarketListJson'"  style="width:200px;">
         </div>
         <div class="fitem">
             <label style="width:100px;">
