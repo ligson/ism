@@ -145,18 +145,25 @@
     //地区，超市，分类联动
     function linkSelect() {
         $("#cid").combotree({
-            onSelect: function (value) {
-                var cid = value.id;
-                var url = "getMarketListJson?cid=" + cid;
-                $('#mid').combobox('reload', url);  // 使用新的URL重新载入列表数据
+            onSelect: function (data) {
+                if(typeof(data)!='undefined'){
+                    var cid = data.id;
+                    $("#mid").combobox('clear','');
+                    $("#categoryId").combobox('clear','');
+                    var url = "getMarketListJson?cid=" + cid;
+                    $('#mid').combobox('reload', url);  // 使用新的URL重新载入列表数据
+                }
             }
-
         });
         mCombox= $("#mid").combobox({
             onSelect: function (value) {
-                var mid = value.id;
-                var url = "getCategoryListJson?mid=" + mid;
-                $("#categoryId").combobox('reload', url);
+                if(typeof(value)!='undefined'){
+                    $("#categoryId").combobox('clear','');
+                    var mid = value.id;
+                    var url = "getCategoryListJson?mid=" + mid;
+                    $("#categoryId").combobox('reload', url);
+                }
+
             }
         });
     }
@@ -185,9 +192,16 @@
     function updateGood() {
         var row = datagrid.datagrid("getSelected");
         linkSelect();
+
         if (row) {
             $('#cid').combotree('setValue', row.city.id);//地区
+            //根据地区id查询超市
+            var url = "getMarketListJson?cid=" + row.city.id;
+            $('#mid').combobox('reload', url);  // 使用新的URL重新载入列
             $('#mid').combobox('setValue', row.market.id);//超市
+            //根据超市id查询分类
+            var url = "getCategoryListJson?mid=" + row.market.id;
+            $("#categoryId").combobox('reload', url);
             $('#categoryId').combobox('setValue', row.category.id);//分类
             $("#dlg").dialog("open").dialog('setTitle', '编辑超市');
             $("#fm").form("load", row);
