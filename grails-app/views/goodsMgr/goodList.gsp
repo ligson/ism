@@ -72,10 +72,13 @@
     var datagrid=$('#list_data').datagrid({
         columns:[[
             {field:'id',title:'ID',width:'20%',align:'center'},
-           /* {field:'city',title:'所在地区',width:'20%',align:'center',formatter:function(value){
+            {field:'city',title:'所在地区',width:'20%',align:'center',formatter:function(value){
                 return value.name;
-            }},*/
+            }},
             {field:'market',title:'超市名称',width:'20%',align:'center',formatter:function(value){
+                return value.name;
+            }},
+            {field:'category',title:'分类名称',width:'20%',align:'center',formatter:function(value){
                 return value.name;
             }},
             {field:'name',title:'商品名称',width:'20%',align:'center'},
@@ -149,7 +152,7 @@
             }
 
         });
-        $("#mid").combobox({
+        mCombox= $("#mid").combobox({
             onSelect: function (value) {
                 var mid = value.id;
                 var url = "getCategoryListJson?mid=" + mid;
@@ -178,10 +181,14 @@
         url = "addGood";
         $("#hidtype").val("submit");
     }
+    var mCombox;
     function updateGood() {
         var row = datagrid.datagrid("getSelected");
         linkSelect();
         if (row) {
+            $('#cid').combotree('setValue', row.city.id);//地区
+            $('#mid').combobox('setValue', row.market.id);//超市
+            $('#categoryId').combobox('setValue', row.category.id);//分类
             $("#dlg").dialog("open").dialog('setTitle', '编辑超市');
             $("#fm").form("load", row);
             url = "updateGood?id=" + row.id;

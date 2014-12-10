@@ -2,6 +2,7 @@ package com.ism.good.service.impl
 
 import com.ism.address.domains.City
 import com.ism.good.service.IGoodService
+import com.ism.goods.domains.Category
 import com.ism.goods.domains.Goods
 import com.ism.market.domains.Market
 import com.ism.order.service.IOrderService
@@ -19,6 +20,8 @@ class GoodService implements IGoodService {
         def good=new Goods(params);
         def market=Market.findById(params.mid);
         good.setMarket(market);
+        def category=Category.findById(params.categoryId);
+        good.setCategory(category);
         if (good.save(flush: true)) {
             result.success = true;
             result.msg = "保存成功";
@@ -33,9 +36,10 @@ class GoodService implements IGoodService {
     Map updateGood(Map params){
         def result=[:];
         def good=Goods.findById(params.id);
-        good.category=params.category;
         def market=Market.findById(params.mid);
         good.market=market;
+        def category=Category.findById(params.categoryId);
+        good.category=category;
         good.no=params.no;
         good.name=params.name;
         good.remark=params.remark;

@@ -16,7 +16,7 @@
              <label style="width:100px;">
                  选择超市
              </label>
-             <input name="mid" class="easyui-combobox"  data-options="valueField:'id',textField:'name',url:'getMarketListJson'"  style="width:200px;">
+             <input name="mid" id="mid" class="easyui-combobox"  data-options="valueField:'id',textField:'name',url:'getMarketListJson'"  style="width:200px;">
          </div>
         <div class="fitem">
             <label style="width:100px;">
@@ -65,6 +65,7 @@
     var datagrid=$('#list_data').datagrid({
         columns:[[
             {field:'id',title:'ID',width:'20%',align:'center'},
+            {field:'marketId',title:'marketId',width:'20%',align:'center'},
             {field:'market',title:'超市',width:'20%',align:'center',formatter:function(value){
                 return value.name;
             }},
@@ -159,7 +160,7 @@
     function updateCategory() {
         var row = datagrid.datagrid("getSelected");
         if (row) {
-            $('#mid').combobox('select', row.marketId);
+            $('#mid').combobox('select', row.market.id);
             $("#dlg").dialog("open").dialog('setTitle', '编辑分类');
             $("#fm").form("load", row);
             url = "updateCategory?id=" + row.id;

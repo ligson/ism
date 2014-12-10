@@ -42,6 +42,8 @@ class GoodsMgrController {
             tmp.no = it.no;
             tmp.market = it.market;
             tmp.mid=it.market.id;
+            tmp.city=it.market.city;
+            tmp.category=it.category;
             tmp.remark = it.remark;
             res.add(tmp);
         }

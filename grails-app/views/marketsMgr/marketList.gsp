@@ -133,6 +133,7 @@
     function updateMarket() {
         var row = datagrid.datagrid("getSelected");
         if (row) {
+            $('#cid').combotree('setValue', row.city.id);//地区
             $("#dlg").dialog("open").dialog('setTitle', '编辑超市');
             $("#fm").form("load", row);
             url = "updateMarket?id=" + row.id;
