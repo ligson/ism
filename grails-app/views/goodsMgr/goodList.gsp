@@ -216,7 +216,20 @@
             url = "getCategoryListJson?mid=" + row.market.id;
             $("#categoryId").combobox('reload', url);
             $('#categoryId').combobox('setValue', row.category.id);//分类
-            $("#dlg").dialog("open").dialog('setTitle', '编辑超市');
+            var editorDialog=$("#dlg").dialog({
+                title:'编辑商品信息',
+                width: 820,
+                height: 650,
+                shadow: true,
+                modal: true,
+                iconCls: 'icon-add',
+                closed: true,
+                minimizable: true,
+                maximizable: true,
+                maximized:true,
+                collapsible: true
+            });
+            editorDialog.dialog("open")
             $("#fm").form("load", row);
             url = "updateGood?id=" + row.id;
         }
