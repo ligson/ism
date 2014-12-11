@@ -155,7 +155,7 @@
                 }
             }
         });
-        mCombox= $("#mid").combobox({
+         $("#mid").combobox({
             onSelect: function (value) {
                 if(typeof(value)!='undefined'){
                     $("#categoryId").combobox('clear','');
@@ -192,15 +192,14 @@
     function updateGood() {
         var row = datagrid.datagrid("getSelected");
         linkSelect();
-
         if (row) {
             $('#cid').combotree('setValue', row.city.id);//地区
             //根据地区id查询超市
-            var url = "getMarketListJson?cid=" + row.city.id;
+             url = "getMarketListJson?cid=" + row.city.id;
             $('#mid').combobox('reload', url);  // 使用新的URL重新载入列
             $('#mid').combobox('setValue', row.market.id);//超市
             //根据超市id查询分类
-            var url = "getCategoryListJson?mid=" + row.market.id;
+            url = "getCategoryListJson?mid=" + row.market.id;
             $("#categoryId").combobox('reload', url);
             $('#categoryId').combobox('setValue', row.category.id);//分类
             $("#dlg").dialog("open").dialog('setTitle', '编辑超市');
@@ -209,6 +208,7 @@
         }
     }
     function save() {
+        alert(url);
         $("#fm").form("submit", {
             url: url,
             onsubmit: function () {
