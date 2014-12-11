@@ -44,6 +44,18 @@
              </label>
              <input name="no"  class="easyui-validatebox" required="true" style="width:200px;"/>
          </div>
+         <div class="fitem">
+             <label style="width:100px;">
+                 商品原价
+             </label>
+             <input name="originalPrice"  class="easyui-validatebox" required="true" style="width:200px;"/>
+         </div>
+         <div class="fitem">
+             <label style="width:100px;">
+                 商品现价
+             </label>
+             <input name="currentPrice"  class="easyui-validatebox" required="true" style="width:200px;"/>
+         </div>
         <div class="fitem">
             <label style="width:100px;">
                 商品内容
@@ -81,8 +93,10 @@
             {field:'category',title:'分类名称',width:'20%',align:'center',formatter:function(value){
                 return value.name;
             }},
-            {field:'name',title:'商品名称',width:'20%',align:'center'},
-            {field:'no',title:'商品名称',width:'20%',align:'center'},
+            {field:'name',title:'商品名称',width:'10%',align:'center'},
+            {field:'no',title:'商品编号',width:'10%',align:'center'},
+            {field:'originalPrice',title:'原价',width:'10%',align:'center'},
+            {field:'currentPrice',title:'售价',width:'10%',align:'center'},
             {field:'remark',title:'备注',width:'20%',align:'center'},
             {field:'sendTime',title:'发布时间',width:'20%',align:'center'}
         ]],
@@ -208,7 +222,6 @@
         }
     }
     function save() {
-        alert(url);
         $("#fm").form("submit", {
             url: url,
             onsubmit: function () {
@@ -247,14 +260,6 @@
             });
         }
     }
-
-    $(document).ready(function () {
-
-
-
-    });
-
-
 </script>
 </body>
 </html>

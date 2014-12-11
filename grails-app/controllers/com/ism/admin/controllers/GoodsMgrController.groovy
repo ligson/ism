@@ -39,6 +39,8 @@ class GoodsMgrController {
             def tmp = [:];
             tmp.id= it.id;
             tmp.name = it.name;
+            tmp.originalPrice=it.originalPrice;
+            tmp.currentPrice=it.currentPrice;
             tmp.no = it.no;
             tmp.market = it.market;
             tmp.mid=it.market.id;
