@@ -1,5 +1,8 @@
 package com.ism.user.service.impl
 
+import com.ism.goods.domains.Category
+import com.ism.goods.domains.Goods
+import com.ism.market.domains.Market
 import com.ism.string.utils.RegUtils
 import com.ism.user.domains.User
 import com.ism.user.service.IUserService
@@ -80,5 +83,58 @@ class UserService implements IUserService {
             superAdmin.save(flush:true);
             log.info("超级管理员初始化成功！手机：1383838521，email：admin@admin.com,密码:password")
         }
+    }
+    /**
+     * 新增用户
+     * @param params
+     * @return
+     */
+    Map addUser(Map params) {
+        def result = [:];
+        def user=new User(params);
+        if (user.save(flush: true)) {
+            result.success = true;
+        }
+        return result;
+    }
+    /**
+     * 更新用户
+     * @param params
+     * @return
+     */
+    Map updateUser(Map params){
+        def result=[:];
+        def user=User.findById(params.id);
+        user.nickName=params.nickName;
+        user.cellphone=params.cellphone;
+        user.createName=params.createName;
+        user.state=params.state;
+        user.role=params.role;
+        user.birth=params.brith;
+        user.email=params.email;
+        user.photo=params.photo;
+        user.sex=params.sex;
+        if (user.save(flush: true)) {
+            result.success = true;
+        } else {
+            result.success = false;
+        }
+        return result;
+    }
+    /**
+     * 删除用户
+     * @param params
+     * @return
+     */
+    Map removeUser(Map params){
+        def result=[:];
+        User user=User.findById(params.id);
+        if(user){
+            user.delete(flush:true)
+            result.success = true;
+        }else{
+            result.success=false;
+        }
+        return result;
     }
 }

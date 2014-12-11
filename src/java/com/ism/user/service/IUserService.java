@@ -22,4 +22,22 @@ public interface IUserService {
      */
     public Map register(Map params);
 
+    /**
+     * 新增用户
+     * @param params
+     * @return
+     */
+    Map addUser(Map params);
+    /**
+     * 更新用户
+     * @param params
+     * @return
+     */
+    Map updateUser(Map params);
+    /**
+     * 删除用户
+     * @param params
+     * @return
+     */
+    Map removeUser(Map params);
 }

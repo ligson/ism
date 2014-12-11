@@ -44,4 +44,8 @@ class User {
             1:"管理员",
             2: "普通用户"
     ]
+    static final Map sexCnName = [
+            true: "男",
+            false:"女",
+    ]
 }
