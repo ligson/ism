@@ -89,4 +89,6 @@ class AdminController {
         def result=userService.removeUser(params);
         return render(result as JSON);
     }
+    //订单管理
+    def orderList(){}
 }

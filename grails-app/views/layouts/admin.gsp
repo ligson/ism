@@ -25,7 +25,7 @@
 
         <div title="订单管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
             <ul class="easyui-tree">
-                <li><a href="${createLink(controller:'goodsMgr',action:'marketList')}"><span>订单列表</span></a></li>
+                <li><a href="${createLink(controller:'admin',action:'orderList')}"><span>订单列表</span></a></li>
                 </li>
             </ul>
         </div>
