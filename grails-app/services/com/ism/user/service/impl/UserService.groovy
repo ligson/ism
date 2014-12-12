@@ -92,6 +92,8 @@ class UserService implements IUserService {
     Map addUser(Map params) {
         def result = [:];
         def user=new User(params);
+        user.setLastLoginDate( new Date().format("yyyy-MM-dd HH:mm:ss"));
+        user.setRegisterDate( new Date().format("yyyy-MM-dd HH:mm:ss"));
         if (user.save(flush: true)) {
             result.success = true;
         }
@@ -110,10 +112,12 @@ class UserService implements IUserService {
         user.createName=params.createName;
         user.state=params.state;
         user.role=params.role;
-        user.birth=params.brith;
+        user.birth=params.birth;
         user.email=params.email;
         user.photo=params.photo;
         user.sex=params.sex;
+        user.setLastLoginDate( new Date().format("yyyy-MM-dd HH:mm:ss"));
+        user.setRegisterDate( new Date().format("yyyy-MM-dd HH:mm:ss"));
         if (user.save(flush: true)) {
             result.success = true;
         } else {

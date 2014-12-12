@@ -65,17 +65,17 @@ class AdminController {
 //            tmp.remark = it.remark;
 //            res.add(tmp);
 //        }
-        return render(res as JSON);
+        return render(jsonMap as JSON);
     }
     /**
-     * 新增超市
+     * 新增用户
      */
     def addUser() {
         def result=userService.addUser(params);
         return render(result as JSON);
     }
     /**
-     * 编辑超市
+     * 编辑用户
      * @return
      */
     def updateUser(){
@@ -83,7 +83,7 @@ class AdminController {
         return render(result as JSON);
     }
     /**
-     * 删除超市
+     * 删除用户
      */
     def removeUser(){
         def result=userService.removeUser(params);

@@ -37,7 +37,7 @@
         <div class="fitem">
             <label style="width:100px;">
                 性别</label>
-            <select name="state"style="width:200px;" class="easyui-combobox">
+            <select name="sex"style="width:200px;" class="easyui-combobox">
                 <g:each in="${User.sexCnName.keySet()}" var="key">
                     <option value="${key}">${User.sexCnName.get(key)}</option>
                 </g:each>
@@ -96,7 +96,7 @@
             {field:'nickName',title:'会员昵称',width:'20%',align:'center'},
             {field:'cellphone',title:'手机号码',width:'20%',align:'center'},
             {field:'sex',title:'性别',width:'20%',align:'center',formatter:function(value){
-                if(value){
+                if(value==1){
                     return "男";
                 }else{
                     return "女";
@@ -181,15 +181,43 @@
     var url;
     var type;
     function addUser() {
-        $("#dlg").dialog("open").dialog('setTitle', '新增用户'); ;
+        var $win;
+        $win = $('#dlg').window({
+            title: '新增用户',
+            width: 820,
+            height: 650,
+            shadow: true,
+            modal: true,
+            iconCls: 'icon-add',
+            closed: true,
+            minimizable: true,
+            maximizable: true,
+            maximized:false,
+            collapsible: true
+        });
+        $win.window('open');
         $("#fm").form("clear");
-        url = "addMarket";
+        url = "addUser";
         $("#hidtype").val("submit");
     }
     function updateUser() {
         var row = datagrid.datagrid("getSelected");
         if (row) {
-            $("#dlg").dialog("open").dialog('setTitle', '编辑用户');
+            var $win;
+            $win = $('#dlg').window({
+                title: '编辑用户',
+                width: 820,
+                height: 650,
+                shadow: true,
+                modal: true,
+                iconCls: 'icon-add',
+                closed: true,
+                minimizable: true,
+                maximizable: true,
+                maximized:false,
+                collapsible: true
+            });
+            $win.window('open');
             $("#fm").form("load", row);
             url = "updateUser?id=" + row.id;
         }
@@ -220,6 +248,7 @@
                 if (r) {
                     $.post('removeUser', { id: row.id }, function (result) {
                         if (result.success) {
+                            $.messager.alert("提示信息", "删除成功");
                             datagrid.datagrid("reload");    // reload the user data
                         } else {
                             $.messager.show({   // show error message

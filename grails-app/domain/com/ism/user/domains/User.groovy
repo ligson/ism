@@ -8,7 +8,7 @@ class User {
     String password;
     String cellphone;
     String email;
-    boolean sex = true;
+    int sex = 1;
     String photo;
     String birth;
     String registerDate = new Date().format("yyyyMMddHHmmss");
@@ -24,8 +24,6 @@ class User {
         email(nullable: true, email: true, unique: true)
         photo(nullable: true, maxSize: 255)
         birth(nullable: true, maxSize: 255)
-        state(inList: stateCnName.keySet().toList())
-        role(inList: roleCnName.keySet().toList())
         createName(nullable:true)
     }
     //字段跟数据库的关联
@@ -45,7 +43,7 @@ class User {
             2: "普通用户"
     ]
     static final Map sexCnName = [
-            true: "男",
-            false:"女",
+            1: "男",
+            0:"女",
     ]
 }
