@@ -19,7 +19,7 @@ class Order {
         table("ism_order")
     }
     static final Map orderStateMap = [
-            0 : "未支付",
+            0 : "未支付1",
             1 : "已支付"
     ]
 }
