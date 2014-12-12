@@ -10,7 +10,6 @@ class Order {
     static hasMany = [goodses:Goods]
     //订单依赖于商品
     static belongsTo = [Goods]
-    Goods goods;
     String orderNo;//订单编号
     double price;//订单总价
     int orderState;
