@@ -5,6 +5,7 @@ import com.ism.goods.domains.Goods
 import com.ism.market.domains.Market
 import com.ism.user.domains.User
 import com.ism.order.domains.Order
+import com.ism.vip.domains.Vip
 import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONArray
 import org.codehaus.groovy.grails.web.json.JSONObject
@@ -115,6 +116,8 @@ class AdminController {
         tmp.orderNo= it.orderNo;
         tmp.price = it.price;
         tmp.orderState=it.orderState;
+        tmp.orderCreateDate=it.orderCreateDate;
+        tmp.vip=it.vip;
         res.add(tmp);
         }
         return render(res as JSON);

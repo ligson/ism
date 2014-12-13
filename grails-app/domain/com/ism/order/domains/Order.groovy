@@ -17,6 +17,7 @@ class Order {
     int orderState;
     String orderCreateDate;//订单创建时间
     static constraints = {
+        vip(nullable: true)
     }
     static mapping = {
         table("ism_order")

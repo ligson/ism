@@ -18,7 +18,7 @@ class Vip {
     //字段跟数据库的关联
     static mapping = {
         state(column: "user_state")
-        table("ism_user")
+        table("ism_vip")
 
     }
     static final Map stateCnName = [

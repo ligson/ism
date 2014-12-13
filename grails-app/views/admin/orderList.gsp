@@ -3,53 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>订单管理</title>
+    <script type="text/javascript" src="${resource(dir: "js/lib/jquery-easyui-1.4.1/plugins/", file: "datagrid-filter.js")}"></script>
+
 </head>
 <body>
-<div id="tb" style="padding:2px 5px;">
-    订单编号：<input class="easyui-validatebox" style="width:110px">
-    订单开始日期: <input class="easyui-datebox" style="width:110px">
-    到: <input class="easyui-datebox" style="width:110px">
-    订单状态:
-    <select class="easyui-combobox" panelHeight="auto" style="width:100px">
-        <option value="1">已支付</option>
-        <option value="2">未支付</option>
-    </select>
-    <a href="#" class="easyui-linkbutton" iconCls="icon-search">Search</a>
-</div>
 <div id="list_data"></div>
-
-<div id="dlg" class="easyui-dialog" style="width: 400px; height: 280px; padding: 10px 20px;"
-     closed="true" buttons="#dlg-buttons">
-    <form id="fm" method="post">
-        <div class="fitem">
-            <label style="width:100px;">
-                订单编号
-            </label>
-            <input name="orderNo"  class="easyui-validatebox" required="true" style="width:200px;"/>
-        </div>
-        <div class="fitem">
-            <label style="width:100px;">
-                订单总价</label>
-            <input class="easyui-validatebox" name="price" required="true" style="width:200px;">
-        </div>
-        <div class="fitem">
-            <label style="width:100px;">
-                订单状态</label>
-            <select name="sex"style="width:200px;" class="easyui-combobox">
-                <g:each in="${Order.orderStateMap.keySet()}" var="key">
-                    <option value="${key}">${Order.orderStateMap.get(key)}</option>
-                </g:each>
-            </select>
-        </div>
-        <input type="hidden" name="action" id="hidtype" />
-    </form>
 </div>
-<div id="dlg-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="save()" iconcls="icon-save">保存</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')"
-       iconcls="icon-cancel">取消</a>
-</div>
-
 <script type="text/javascript">
     //datagrid初始化
     var datagrid=$('#list_data').datagrid({
@@ -58,7 +17,9 @@
             {field:'price',title:'订单总价',width:'20%',align:'center'},
             {field:'orderCreateDate',title:'订单生成时间',width:'20%',align:'center'},
             {field:'vip',title:'会员手机号',width:'20%',align:'center',formatter:function(value){
-                return value.mobile;
+                if(value){
+                    return value.mobile;
+                }
             }},
             {field:'orderState',title:'订单状态',width:'20%',align:'center',formatter:function(value){
                 if(value==1){
@@ -71,7 +32,7 @@
         title:'订单管理',
         iconCls:'icon-edit',//图标
         width: 700,
-        height: 'auto',
+        height: 600,
         nowrap: false,
         striped: true,
         border: true,
@@ -109,6 +70,56 @@
 //            }
 //        }]
     });
+
+    $('#list_data').datagrid('enableFilter', [{
+        field:'orderNo',
+        type:'textbox',
+        options:{precision:1},
+        op:['equal','notequal','less','greater']
+    },{
+        field:'orderCreateDate',
+        type:'datetimebox',
+        options:{precision:1},
+        op:['equal','notequal','less','greater']
+    },{
+        field:'vip',
+        type:'numberbox',
+        options:{precision:1},
+        op:['equal','notequal','less','greater']
+        },
+        {
+            field:'price',
+            type:'numberbox',
+            options:{precision:2},
+            op:['equal','notequal','less','greater']
+        },
+        {
+        field: 'orderState',
+        type: 'combobox',
+        options: {
+            panelHeight: 'auto',
+            data: [{value: '', text: '全部'}, {value: '未支付', text: '未支付'}, {value: '已支付', text: '已支付'}],
+            onChange: function (value) {
+                if (value == '') {
+                    datagrid.datagrid('removeFilterRule', 'orderState');
+                } else {
+                    datagrid.datagrid('addFilterRule', {
+                        field: 'orderState',
+                        op: 'equal',
+                        value: value
+                    });
+                }
+                datagrid.datagrid('doFilter');
+            }
+        }
+    }
+    ]);
+    $('#dg').datagrid('addFilterRule', {
+        field: 'desp',
+        op: 'contains',
+        value: 'easyui'
+    });
+
     //设置分页控件
     var p = $('#list_data').datagrid('getPager');
     $(p).pagination({
