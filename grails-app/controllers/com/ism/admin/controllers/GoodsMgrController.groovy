@@ -47,6 +47,10 @@ class GoodsMgrController {
             tmp.city=it.market.city;
             tmp.category=it.category;
             tmp.remark = it.remark;
+            tmp.produceType = it.produceType;
+            tmp.prickle = it.prickle;
+            tmp.count = it.count;
+            tmp.subtotal = it.subtotal;
             res.add(tmp);
         }
         return render(res as JSON);
@@ -73,19 +77,21 @@ class GoodsMgrController {
         }
         return render(res as JSON);
     }
+    //商品列表页面初始化
     def goodList(){
 
     }
+    //分类列表页面初始化
     def categoryList(){}
     /**
-     * 新增超市
+     * 新增商品
      */
     def addGood() {
         def result=goodService.addGood(params);
         return render(result as JSON);
     }
     /**
-     * 编辑超市
+     * 编辑商品
      * @return
      */
     def updateGood(){
@@ -93,7 +99,7 @@ class GoodsMgrController {
         return render(result as JSON);
     }
     /**
-     * 删除超市
+     * 删除商品
      */
     def removeGood(){
         def result=goodService.removeGood(params);

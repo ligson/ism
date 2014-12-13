@@ -56,6 +56,30 @@
              </label>
              <input name="currentPrice"  class="easyui-validatebox" required="true" style="width:200px;"/>
          </div>
+         <div class="fitem">
+             <label style="width:100px;">
+                 商品型号
+             </label>
+             <input name="produceType"  class="easyui-validatebox" required="true" style="width:200px;"/>
+         </div>
+         <div class="fitem">
+             <label style="width:100px;">
+                 计量单位
+             </label>
+             <input name="prickle"  class="easyui-validatebox" required="true" style="width:200px;"/>
+         </div>
+         <div class="fitem">
+             <label style="width:100px;">
+                 入库数量
+             </label>
+             <input name="count"  class="easyui-validatebox" required="true" style="width:200px;"/>
+         </div>
+         <div class="fitem">
+             <label style="width:100px;">
+                 入库总金额
+             </label>
+             <input name="subtotal"  class="easyui-validatebox" required="true" style="width:200px;"/>
+         </div>
         <div class="fitem">
             <label style="width:100px;">
                 商品内容
@@ -95,8 +119,12 @@
             }},
             {field:'name',title:'商品名称',width:'10%',align:'center'},
             {field:'no',title:'商品编号',width:'10%',align:'center'},
-            {field:'originalPrice',title:'原价',width:'10%',align:'center'},
+            {field:'originalPrice',title:'单价',width:'10%',align:'center'},
             {field:'currentPrice',title:'售价',width:'10%',align:'center'},
+            {field:'produceType',title:'商品型号',width:'10%',align:'center'},
+            {field:'prickle',title:'计量单位',width:'10%',align:'center'},
+            {field:'count',title:'入库数量',width:'10%',align:'center'},
+            {field:'subtotal',title:'入库金额',width:'10%',align:'center'},
             {field:'remark',title:'备注',width:'20%',align:'center'},
             {field:'sendTime',title:'发布时间',width:'20%',align:'center'}
         ]],
