@@ -5,9 +5,16 @@
     <title>订单管理</title>
 </head>
 <body>
-<div class="fitem">
-    <label style="width:100px">订单编号</label>
-    <input type="text" id="orderNo">
+<div id="tb" style="padding:2px 5px;">
+    订单编号：<input class="easyui-validatebox" style="width:110px">
+    订单开始日期: <input class="easyui-datebox" style="width:110px">
+    到: <input class="easyui-datebox" style="width:110px">
+    订单状态:
+    <select class="easyui-combobox" panelHeight="auto" style="width:100px">
+        <option value="1">已支付</option>
+        <option value="2">未支付</option>
+    </select>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-search">Search</a>
 </div>
 <div id="list_data"></div>
 
@@ -49,6 +56,10 @@
         columns:[[
             {field:'orderNo',title:'订单编号',width:'20%',align:'center'},
             {field:'price',title:'订单总价',width:'20%',align:'center'},
+            {field:'orderCreateDate',title:'订单生成时间',width:'20%',align:'center'},
+            {field:'vip',title:'会员手机号',width:'20%',align:'center',formatter:function(value){
+                return value.mobile;
+            }},
             {field:'orderState',title:'订单状态',width:'20%',align:'center',formatter:function(value){
                 if(value==1){
                     return "已支付";

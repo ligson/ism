@@ -1,7 +1,7 @@
 package com.ism.user.domains
 
 /***
- * 用户类
+ * 后台用户管理账号
  */
 class User {
     String nickName;
