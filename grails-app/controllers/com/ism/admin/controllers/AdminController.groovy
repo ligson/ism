@@ -98,13 +98,13 @@ class AdminController {
         jsonMap.put("rows", list);//rows键 存放每页记录 list
         def res = [];
         list.each {
-        def tmp = [:];
-        tmp.orderNo= it.orderNo;
-        tmp.price = it.price;
-        tmp.orderState=it.orderState;
-        tmp.orderCreateDate=it.orderCreateDate;
-        tmp.vip=it.vip;
-        res.add(tmp);
+            def tmp = [:];
+            tmp.orderNo= it.orderNo;
+            tmp.price = it.price;
+            tmp.orderState=it.orderState;
+            tmp.orderCreateDate=it.orderCreateDate;
+            tmp.vip=it.vip;
+            res.add(tmp);
         }
         return render(res as JSON);
     }
