@@ -108,7 +108,6 @@ class AdminController {
         }
         return render(res as JSON);
     }
-    //消息管理
     //消息推送页面跳转
     def messageList(){}
 }
