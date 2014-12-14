@@ -11,6 +11,7 @@ import org.codehaus.groovy.grails.web.json.JSONArray
 import org.codehaus.groovy.grails.web.json.JSONObject
 class AdminController {
 
+    def vipService;
     def userService;
     def index() {
         return render(view:'login')
@@ -27,11 +28,14 @@ class AdminController {
             }
         }
     }
-  def userList(){
+    /**
+     * 会员列表页面跳转
+     */
+  def vipList(){
 
   }
     /**
-     * 用户列表
+     * 会员列表数据加载
      * @return
      */
     def list(){
@@ -43,51 +47,33 @@ class AdminController {
         int number = Integer.parseInt((rows == null || rows == "0") ? "10":rows);
         //每页的开始记录  第一页为1  第二页为number +1
         int start = (intPage-1)*number;
-        List<User> list=null;
-        int total=User.findAll().size();
+        List<Vip> list=null;
+        int total=Vip.findAll().size();
         if(total>0){
-            list=User.findAll();
+            list=Vip.findAll();
         }
         Map<String, Object> jsonMap = new HashMap<String, Object>();//定义map
         jsonMap.put("total", total);//total键 存放总记录数，必须的
         jsonMap.put("rows", list);//rows键 存放每页记录 list
-//        def res = [];
-//        list.each {
-//            def tmp = [:];
-//            tmp.id= it.id;
-//            tmp.name = it.nickName;
-//            tmp.originalPrice=it.birth;
-//            tmp.currentPrice=it.cellphone;
-//            tmp.no = it.createName;
-//            tmp.market = it.state;
-//            tmp.mid=it.role;
-//            tmp.city=it.registerDate;
-//            tmp.category=it.;
-//            tmp.remark = it.remark;
-//            res.add(tmp);
 //        }
         return render(jsonMap as JSON);
     }
     /**
-     * 新增用户
-     */
-    def addUser() {
-        def result=userService.addUser(params);
-        return render(result as JSON);
-    }
-    /**
-     * 编辑用户
+     * 编辑会员
      * @return
      */
-    def updateUser(){
-        def result=userService.updateUser(params);
+    def updateVip(){
+        def result=vipService.updateVip(params);
         return render(result as JSON);
     }
+    def resPassword(){
+        def result=vipService.resPassword();
+    }
     /**
-     * 删除用户
+     * 删除会员
      */
-    def removeUser(){
-        def result=userService.removeUser(params);
+    def removeVip(){
+        def result=vipService.removeVip(params);
         return render(result as JSON);
     }
     //订单管理(页面跳转)
@@ -122,4 +108,7 @@ class AdminController {
         }
         return render(res as JSON);
     }
+    //消息管理
+    //消息推送页面跳转
+    def messageList(){}
 }

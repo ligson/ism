@@ -10,14 +10,14 @@ class Vip {
     String password;//会员登录密码
     String registerDate = new Date().format("yyyy-MM-dd HH:mm:ss");//会员注册时间
     String lastLoginDate = new Date().format("yyyy-MM-dd HH:mm:ss");//会员最后登录时间
-    int state = 1;//会员状态
+    String status;//会员状态
     //字段的逻辑约束
     static constraints = {
         mobile(nullable: true, maxSize: 11, unique: true)
     }
     //字段跟数据库的关联
     static mapping = {
-        state(column: "user_state")
+        status(column: "vip_status")
         table("ism_vip")
 
     }
