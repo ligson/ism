@@ -23,4 +23,18 @@ public interface IVipService {
      * 密码重置
      */
     Map resPassword(Map params);
-}
+    /**
+     * 消息发送
+     * @param params
+     * @return
+     */
+    Map addMessage(Map params);
+
+    /**
+     * 删除消息
+     * @param params
+     * @return
+     */
+    Map removeMessage(Map params);
+
+    }

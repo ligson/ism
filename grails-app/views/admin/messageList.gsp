@@ -1,4 +1,4 @@
-<%@ page import="com.ism.order.domains.Order;" contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.ism.message.domains.Message" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -8,24 +8,30 @@
 </head>
 <body>
 <div id="list_data"></div>
-</div>
 <script type="text/javascript">
     //datagrid初始化
     var datagrid=$('#list_data').datagrid({
         columns:[[
-            {field:'orderNo',title:'订单编号',width:'20%',align:'center'},
-            {field:'price',title:'订单总价',width:'20%',align:'center'},
-            {field:'orderCreateDate',title:'订单生成时间',width:'20%',align:'center'},
+            {field:'title',title:'消息标题',width:'20%',align:'center'},
+            {field:'content',title:'消息内容',width:'20%',align:'center'},
+            {field:'sendTime',title:'发送时间',width:'20%',align:'center'},
             {field:'vip',title:'会员手机号',width:'20%',align:'center',formatter:function(value){
                 if(value){
                     return value.mobile;
                 }
             }},
-            {field:'orderState',title:'订单状态',width:'20%',align:'center',formatter:function(value){
+            {field:'status',title:'消息状态',width:'20%',align:'center',formatter:function(value){
                 if(value==1){
-                    return "已支付";
+                    return "已读";
                 }else{
-                    return "未支付";
+                    return "未读";
+                }
+            }},
+            {field:'msgType',title:'消息状态',width:'20%',align:'center',formatter:function(value){
+                if(value==1){
+                    return "站内消息";
+                }else{
+                    return "短信";
                 }
             }}
         ]],
@@ -37,7 +43,7 @@
         border: true,
         collapsible:true,//是否可折叠的
         fit: true,//自动大小
-        url:'findOrderList',
+        url:'findMessageList',
         //sortName: 'code',
         //sortOrder: 'desc',
         remoteSort:false,
@@ -50,33 +56,21 @@
         ]]
         ,
         toolbar: [{
-            text: '添加',
-            iconCls: 'icon-add',
-            handler: function() {
-                addUser();
-            }
-        }, '-', {
-            text: '修改',
-            iconCls: 'icon-edit',
-            handler: function() {
-                updateUser();
-            }
-        }, '-',{
             text: '删除',
             iconCls: 'icon-remove',
             handler: function(){
-                removeUser();
+                removeMessage();
             }
         }]
     });
 
     $('#list_data').datagrid('enableFilter', [{
-        field:'orderNo',
+        field:'title',
         type:'textbox',
         options:{precision:1},
         op:['equal','notequal','less','greater']
     },{
-        field:'orderCreateDate',
+        field:'sendTime',
         type:'datetimebox',
         options:{precision:1},
         op:['equal','notequal','less','greater']
@@ -87,23 +81,37 @@
         op:['equal','notequal','less','greater']
     },
         {
-            field:'price',
-            type:'numberbox',
-            options:{precision:2},
-            op:['equal','notequal','less','greater']
-        },
-        {
-            field: 'orderState',
+            field: 'status',
             type: 'combobox',
             options: {
                 panelHeight: 'auto',
-                data: [{value: '', text: '全部'}, {value: '未支付', text: '未支付'}, {value: '已支付', text: '已支付'}],
+                data: [{value: '', text: '全部'}, {value: '已读', text: '已读'}, {value: '未读', text: '未读'}],
                 onChange: function (value) {
                     if (value == '') {
-                        datagrid.datagrid('removeFilterRule', 'orderState');
+                        datagrid.datagrid('removeFilterRule', 'status');
                     } else {
                         datagrid.datagrid('addFilterRule', {
-                            field: 'orderState',
+                            field: 'status',
+                            op: 'equal',
+                            value: value
+                        });
+                    }
+                    datagrid.datagrid('doFilter');
+                }
+            }
+        },
+        {
+            field: 'msgType',
+            type: 'combobox',
+            options: {
+                panelHeight: 'auto',
+                data: [{value: '', text: '全部'}, {value: '站内消息', text: '站内消息'}, {value: '短信', text: '短信'}],
+                onChange: function (value) {
+                    if (value == '') {
+                        datagrid.datagrid('removeFilterRule', 'msgType');
+                    } else {
+                        datagrid.datagrid('addFilterRule', {
+                            field: 'msgType',
                             op: 'equal',
                             value: value
                         });
@@ -113,12 +121,6 @@
             }
         }
     ]);
-    $('#dg').datagrid('addFilterRule', {
-        field: 'desp',
-        op: 'contains',
-        value: 'easyui'
-    });
-
     //设置分页控件
     var p = $('#list_data').datagrid('getPager');
     $(p).pagination({
@@ -135,48 +137,48 @@
     });
     var url;
     var type;
-    function addUser() {
-        var $win;
-        $win = $('#dlg').window({
-            title: '新增用户',
-            width: 820,
-            height: 650,
-            shadow: true,
-            modal: true,
-            iconCls: 'icon-add',
-            closed: true,
-            minimizable: true,
-            maximizable: true,
-            maximized:false,
-            collapsible: true
-        });
-        $win.window('open');
-        $("#fm").form("clear");
-        url = "addUser";
-        $("#hidtype").val("submit");
-    }
-    function updateUser() {
-        var row = datagrid.datagrid("getSelected");
-        if (row) {
-            var $win;
-            $win = $('#dlg').window({
-                title: '编辑用户',
-                width: 820,
-                height: 650,
-                shadow: true,
-                modal: true,
-                iconCls: 'icon-add',
-                closed: true,
-                minimizable: true,
-                maximizable: true,
-                maximized:false,
-                collapsible: true
-            });
-            $win.window('open');
-            $("#fm").form("load", row);
-            url = "updateUser?id=" + row.id;
-        }
-    }
+//    function addUser() {
+//        var $win;
+//        $win = $('#dlg').window({
+//            title: '新增用户',
+//            width: 820,
+//            height: 650,
+//            shadow: true,
+//            modal: true,
+//            iconCls: 'icon-add',
+//            closed: true,
+//            minimizable: true,
+//            maximizable: true,
+//            maximized:false,
+//            collapsible: true
+//        });
+//        $win.window('open');
+//        $("#fm").form("clear");
+//        url = "addUser";
+//        $("#hidtype").val("submit");
+//    }
+//    function updateUser() {
+//        var row = datagrid.datagrid("getSelected");
+//        if (row) {
+//            var $win;
+//            $win = $('#dlg').window({
+//                title: '编辑用户',
+//                width: 820,
+//                height: 650,
+//                shadow: true,
+//                modal: true,
+//                iconCls: 'icon-add',
+//                closed: true,
+//                minimizable: true,
+//                maximizable: true,
+//                maximized:false,
+//                collapsible: true
+//            });
+//            $win.window('open');
+//            $("#fm").form("load", row);
+//            url = "updateUser?id=" + row.id;
+//        }
+//    }
     function save() {
         $("#fm").form("submit", {
             url: url,
@@ -196,12 +198,12 @@
             }
         });
     }
-    function removeUser() {
+    function removeMessage() {
         var row = datagrid.datagrid('getSelected');
         if (row) {
             $.messager.confirm('Confirm', '确定要删除选择的数据吗?', function (r) {
                 if (r) {
-                    $.post('removeUser', { id: row.id }, function (result) {
+                    $.post('removeMessage', { id: row.id }, function (result) {
                         if (result.success) {
                             $.messager.alert("提示信息", "删除成功");
                             datagrid.datagrid("reload");    // reload the user data

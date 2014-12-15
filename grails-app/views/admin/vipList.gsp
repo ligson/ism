@@ -1,4 +1,4 @@
-<%@ page import="com.ism.vip.domains.Vip " contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.ism.message.domains.Message; com.ism.vip.domains.Vip " contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,48 @@
 </head>
 <body>
 <div id="list_data"></div>
+<div id="addDlg" class="easyui-dialog" style="width: 400px; height: 280px; padding: 10px 20px;"
+     closed="true" buttons="#dlg-buttons">
+    <div class="ftitle">
+
+    </div>
+    <form id="addFm" method="post">
+        <div class="fitem">
+            <label style="width:100px;">
+                消息标题
+            </label>
+            <input name="name"  class="easyui-validatebox" required="true" style="width:200px;"/>
+        </div>
+        <div class="fitem">
+            <label style="width:100px;">
+                消息内容
+            </label>
+            <input name="no"  class="easyui-validatebox" required="true" style="width:200px;"/>
+        </div>
+        <div class="fitem">
+            <label style="width:100px;">
+                发送人
+            </label>
+            <input name="originalPrice"  class="easyui-validatebox" required="true" style="width:200px;"/>
+        </div>
+        <div class="fitem">
+            <label style="width:100px;">
+                会员状态</label>
+            <select name="status" style="width:200px;" class="easyui-combobox">
+                <g:each in="${Message.msgTypeName.keySet()}" var="key">
+                    <option value="${key}">${Message.msgTypeName.get(key)}</option>
+                </g:each>
+            </select>
+        </div>
+        <input type="hidden" name="action" id="addHideType" />
+    </form>
+</div>
+<div id="addDlg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="save('add')" iconcls="icon-save">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#addDlg').dialog('close')"
+       iconcls="icon-cancel">取消</a>
+</div>
+
 <div id="dlg" class="easyui-dialog" style="width: 400px; height: 280px; padding: 10px 20px;"
      closed="true" buttons="#dlg-buttons">
     <div class="ftitle">
@@ -25,7 +67,7 @@
     </form>
 </div>
 ?<div id="dlg-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="save()" iconcls="icon-save">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="save('update')" iconcls="icon-save">保存</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')"
        iconcls="icon-cancel">取消</a>
 </div>
@@ -96,8 +138,28 @@
     });
     var url;
     var type;
+    function addMessage() {
+        var $win;
+        $win = $('#dlg').window({
+            title: '消息推送',
+            width: 520,
+            height: 350,
+            shadow: true,
+            modal: true,
+            iconCls: 'icon-add',
+            closed: true,
+            minimizable: true,
+            maximizable: true,
+            maximized:false,
+            collapsible: true
+        });
+        $win.window('open');
+        $("#addFm").form("clear");
+        url = "addMessage";
+        $("#addHideType").val("submit");
+    }
     function updateVip() {
-        var row = $('#list_data').datagrid("getSelections");
+        var row = $('#list_data').datagrid("getSelected");
         if (row) {
             if(row.length>1){
                 $.messager.alert("提示信息", "只能选择一条会员信息");
@@ -119,15 +181,20 @@
                 });
                 $win.window('open');
                 $("#fm").form("load", row);
-                console.log(row);
                 url = "updateVip?id=" + row.id;
             }
         }else{
             $.messager.alert("提示信息", "请选择一条会员信息");
         }
     }
-    function save() {
-        $("#fm").form("submit", {
+    function save(flag) {
+        var $form;
+        if(flag='add'){
+            $form= $("#addFm");
+        }else{
+            $form=$("#fm");
+        }
+        $form.form("submit", {
             url: url,
             onsubmit: function () {
                 return $(this).form("validate");

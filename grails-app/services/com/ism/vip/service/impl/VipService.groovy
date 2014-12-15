@@ -1,5 +1,6 @@
 package com.ism.vip.service.impl
 
+import com.ism.message.domains.Message
 import com.ism.string.utils.RegUtils
 import com.ism.user.domains.User
 import com.ism.user.service.IUserService
@@ -58,5 +59,35 @@ class VipService implements IVipService {
         }
         return result;
 
+    }
+    /**
+     * 消息发送
+     * @param params
+     * @return
+     */
+    Map addMessage(Map params){
+        def result = [:];
+        Message message=new Message(params);
+        message.sendTime( new Date().format("yyyy-MM-dd HH:mm:ss"));
+        if (message.save(flush: true)) {
+            result.success = true;
+        }
+        return result;
+    }
+    /**
+     * 删除消息
+     * @param params
+     * @return
+     */
+    Map removeMessage(Map params){
+        def result=[:];
+        Message message=Message.findById(params.id);
+        if(message){
+            message.delete(flush:true)
+            result.success = true;
+        }else{
+            result.success=false;
+        }
+        return result;
     }
 }
