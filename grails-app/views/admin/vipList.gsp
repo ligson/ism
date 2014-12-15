@@ -109,6 +109,12 @@
             {field:'ck',checkbox:true}
         ]],
         toolbar: [{
+            text: '消息推送',
+            iconCls: 'icon-add',
+            handler: function() {
+                addMessage();
+            }
+        },{
             text: '修改',
             iconCls: 'icon-edit',
             handler: function() {
