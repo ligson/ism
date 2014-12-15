@@ -39,7 +39,6 @@
                 </g:each>
             </select>
         </div>
-        <input type="hidden" name="action" id="addHideType" />
     </form>
 </div>
 <div id="addDlg-buttons">
