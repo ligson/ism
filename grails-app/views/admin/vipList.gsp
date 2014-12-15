@@ -33,7 +33,7 @@
         <div class="fitem">
             <label style="width:100px;">
                 会员状态</label>
-            <select name="status" style="width:200px;" class="easyui-combobox">
+            <select name="status" style="width:200px;" class="easyui-combobox" required="true">
                 <g:each in="${Message.msgTypeName.keySet()}" var="key">
                     <option value="${key}">${Message.msgTypeName.get(key)}</option>
                 </g:each>
@@ -66,7 +66,7 @@
         <input type="hidden" name="action" id="hidtype" />
     </form>
 </div>
-?<div id="dlg-buttons">
+<div id="dlg-buttons">
     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="save('update')" iconcls="icon-save">保存</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')"
        iconcls="icon-cancel">取消</a>
@@ -146,7 +146,7 @@
     var type;
     function addMessage() {
         var $win;
-        $win = $('#dlg').window({
+        $win = $('#addDlg').window({
             title: '消息推送',
             width: 520,
             height: 350,
