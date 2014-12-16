@@ -7,7 +7,7 @@
 <body>
 <div id="list_data"></div>
 <div id="addDlg" class="easyui-dialog" style="width: 400px; height: 280px; padding: 10px 20px;"
-     closed="true" buttons="#dlg-buttons">
+     closed="true" buttons="#addDlg-buttons">
     <div class="ftitle">
 
     </div>
