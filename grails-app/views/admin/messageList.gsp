@@ -12,22 +12,22 @@
     //datagrid初始化
     var datagrid=$('#list_data').datagrid({
         columns:[[
-            {field:'title',title:'消息标题',width:'20%',align:'center'},
+            {field:'title',title:'消息标题',width:'15%',align:'center'},
             {field:'content',title:'消息内容',width:'20%',align:'center'},
-            {field:'sendTime',title:'发送时间',width:'20%',align:'center'},
+            {field:'sendDate',title:'发送时间',width:'15%',align:'center'},
             {field:'vip',title:'会员手机号',width:'20%',align:'center',formatter:function(value){
                 if(value){
                     return value.mobile;
                 }
             }},
-            {field:'status',title:'消息状态',width:'20%',align:'center',formatter:function(value){
+            {field:'status',title:'消息状态',width:'15%',align:'center',formatter:function(value){
                 if(value==1){
                     return "已读";
                 }else{
                     return "未读";
                 }
             }},
-            {field:'msgType',title:'消息状态',width:'20%',align:'center',formatter:function(value){
+            {field:'msgType',title:'消息类型',width:'15%',align:'center',formatter:function(value){
                 if(value==1){
                     return "站内消息";
                 }else{
@@ -35,9 +35,10 @@
                 }
             }}
         ]],
-        iconCls:'icon-edit',//图标
-        width: 700,
-        height: 600,
+        iconCls:'icon-search',//图标
+        title:'消息推送',
+        width: '100%',
+        height: 'auto',
         nowrap: false,
         striped: true,
         border: true,
@@ -69,8 +70,13 @@
         type:'textbox',
         options:{precision:1},
         op:['equal','notequal','less','greater']
-    },{
-        field:'sendTime',
+    }, {
+            field:'content',
+            type:'textbox',
+            options:{precision:1},
+            op:['equal','notequal','less','greater']
+        },{
+        field:'sendDate',
         type:'datetimebox',
         options:{precision:1},
         op:['equal','notequal','less','greater']
@@ -85,7 +91,7 @@
             type: 'combobox',
             options: {
                 panelHeight: 'auto',
-                data: [{value: '', text: '全部'}, {value: '已读', text: '已读'}, {value: '未读', text: '未读'}],
+                data: [{value: '', text: '全部'}, {value: '1', text: '已读'}, {value: '0', text: '未读'}],
                 onChange: function (value) {
                     if (value == '') {
                         datagrid.datagrid('removeFilterRule', 'status');
@@ -105,7 +111,7 @@
             type: 'combobox',
             options: {
                 panelHeight: 'auto',
-                data: [{value: '', text: '全部'}, {value: '站内消息', text: '站内消息'}, {value: '短信', text: '短信'}],
+                data: [{value: '', text: '全部'}, {value: '1', text: '站内消息'}, {value: '2', text: '短信'}],
                 onChange: function (value) {
                     if (value == '') {
                         datagrid.datagrid('removeFilterRule', 'msgType');

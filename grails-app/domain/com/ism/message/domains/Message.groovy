@@ -11,9 +11,13 @@ class Message {
     String content;//消息内容
     String status;//消息状态 0 未读 1 已读
     String msgType;//消息类型
-    String sendTime;//发送时间
+    String sendDate=new Date().format("yyyyMMddHHmmss");//发送时间
     String sendAuthor;//发送者
     Vip vip;//接收者
+    static constraints = {
+        sendDate(nullable: true)
+        status(nullable: true)
+    }
     static mapping = {
         table('ism_message');
     }
