@@ -67,8 +67,11 @@ class VipService implements IVipService {
      */
     Map addMessage(Map params){
         def result = [:];
-        Message message=new Message(params);
-        message.sendTime( new Date().format("yyyy-MM-dd HH:mm:ss"));
+        def message=new Message(params);
+        def vip=Vip.findById(params.vid);
+        message.setVip(vip);
+        message.setSendDate(new Date().format("yyyy-MM-dd HH:mm:ss"));
+        message.status="0";//默认未读
         if (message.save(flush: true)) {
             result.success = true;
         }

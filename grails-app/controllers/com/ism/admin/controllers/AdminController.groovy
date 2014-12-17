@@ -140,10 +140,11 @@ class AdminController {
         list.each {
             def tmp = [:];
             tmp.id= it.id;
-            tmp.sendTime = it.sendTime;
+            tmp.sendDate = it.sendDate;
             tmp.status=it.status;
             tmp.content=it.content;
             tmp.msgType=it.msgType;
+            tmp.title=it.title;
             tmp.vip=it.vip;
             res.add(tmp);
         }

@@ -16,24 +16,24 @@
             <label style="width:100px;">
                 消息标题
             </label>
-            <input name="name"  class="easyui-validatebox" required="true" style="width:200px;"/>
+            <input name="title"  class="easyui-validatebox" required="true" style="width:200px;"/>
         </div>
         <div class="fitem">
             <label style="width:100px;">
                 消息内容
             </label>
-            <input name="no"  class="easyui-validatebox" required="true" style="width:200px;"/>
+            <input name="content"  class="easyui-validatebox" required="true" style="width:200px;"/>
         </div>
         <div class="fitem">
             <label style="width:100px;">
                 发送人
             </label>
-            <input name="originalPrice"  class="easyui-validatebox" required="true" style="width:200px;"/>
+            <input name="sendAuthor"  class="easyui-validatebox" required="true" style="width:200px;"/>
         </div>
         <div class="fitem">
             <label style="width:100px;">
                 会员状态</label>
-            <select name="status" style="width:200px;" class="easyui-combobox" required="true">
+            <select name="msgType" style="width:200px;" class="easyui-combobox" required="true">
                 <g:each in="${Message.msgTypeName.keySet()}" var="key">
                     <option value="${key}">${Message.msgTypeName.get(key)}</option>
                 </g:each>
@@ -158,10 +158,17 @@
             maximized:false,
             collapsible: true
         });
-        $win.window('open');
-        $("#addFm").form("clear");
-        url = "addMessage";
-        $("#addHideType").val("submit");
+        var row = $('#list_data').datagrid("getSelected");
+        if(row){
+            $win.window('open');
+            $("#addFm").form("clear");
+            url = "addMessage?vid="+row.id;
+            $("#addHideType").val("submit");
+        }else{
+            $.messager.alert("提示信息", "请选择要发送消息的会员");
+            return;
+        }
+
     }
     function updateVip() {
         var row = $('#list_data').datagrid("getSelected");
@@ -208,7 +215,11 @@
                 data = eval("(" + result + ")");
                 if (data.success) {
                     $.messager.alert("提示信息", "操作成功");
-                    $("#dlg").dialog("close");
+                    if(flag=='add'){
+                        $("#addDlg").dialog("close");
+                    }else{
+                        $("#dlg").dialog("close");
+                    }
                     datagrid.datagrid("reload");
                 }
                 else {
