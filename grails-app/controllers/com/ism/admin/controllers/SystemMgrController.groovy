@@ -1,11 +1,13 @@
 package com.ism.admin.controllers
 
+import com.ism.code.domains.CodeSort
 import com.ism.user.domains.User
 import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONArray
 
 class SystemMgrController {
     def userService;
+    def codeService;
     def index() {}
     /**
      * 用户列表页面跳转
@@ -56,6 +58,75 @@ class SystemMgrController {
      */
     def removeUser(){
         def result=userService.removeUser(params);
+        return render(result as JSON);
+    }
+    /**代码管理**/
+    /**
+     * 代码管理页面初始化
+     */
+    def codeSortList(){}
+    /**
+     * 代码管理数据初始化加载
+     */
+    def codeSortDataList(){
+        JSONArray result;//返回的json
+        def page=params.page;
+        def rows=params.rows;
+        int intPage = Integer.parseInt((page == null || page == "0") ? "1":page);
+        //每页显示条数
+        int number = Integer.parseInt((rows == null || rows == "0") ? "10":rows);
+        //每页的开始记录  第一页为1  第二页为number +1
+        int start = (intPage-1)*number;
+        List<CodeSort> list=null;
+        int total=CodeSort.findAll().size();
+        if(total>0){
+            list=CodeSort.findAll();
+        }
+        Map<String, Object> jsonMap = new HashMap<String, Object>();//定义map
+        jsonMap.put("total", total);//total键 存放总记录数，必须的
+        jsonMap.put("rows", list);//rows键 存放每页记录 list
+        return render(jsonMap as JSON);
+    }
+    /**
+     * 新增代码分类
+     */
+    def addCodeSort(Map params){
+        def result=codeService.addCodeSort(params);
+        return render(result as JSON);
+    }
+    /**
+     * 编辑代码分类
+     */
+    def editCodeSort(Map params){
+        def result=codeService.editCodeSort(params);
+        return render(result as JSON);
+    }
+    /**
+     * 删除代码分类
+     */
+    def deleteCodeSort(Map params){
+        def result=codeService.deleteCodeSort(params);
+        return render(result as JSON);
+    }
+    /**
+     * 新增代码信息
+     */
+    def addCodeInfo(Map params){
+        def result=codeService.addCodeInfo(params);
+        return render(result as JSON);
+    }
+    /**
+     * 编辑代码信息
+     */
+    def editCodeInfo(Map params){
+        def result=codeService.editCodeInfo(params);
+        return render(result as JSON);
+    }
+    /**
+     * 删除代码信息
+     */
+    def deleteCodeInfo(Map params){
+        def result=codeService.deleteCodeInfo(params);
         return render(result as JSON);
     }
 }

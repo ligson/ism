@@ -21,7 +21,7 @@
             <ul class="easyui-tree"><li><a href="${createLink(controller:'systemMgr',action:'userList')}">用户管理</a></li></ul>
             <ul class="easyui-tree"><li><a href="${createLink(controller:'goodsMgr',action:'marketList')}">菜单管理</a></li></ul>
             <ul class="easyui-tree"><li><a href="${createLink(controller:'goodsMgr',action:'marketList')}">角色管理</a></li></ul>
-            <ul class="easyui-tree"><li><a href="${createLink(controller:'goodsMgr',action:'marketList')}">元数据管理</a></li></ul>
+            <ul class="easyui-tree"><li><a href="${createLink(controller:'systemMgr',action:'codeSortList')}">代码管理</a></li></ul>
         </div>
         <div title="统计管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
             <ul class="easyui-tree">
