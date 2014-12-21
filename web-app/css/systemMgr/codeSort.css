@@ -1,0 +1,9 @@
+* { margin:0; padding:0; }
+
+#wrap{ overflow:hidden; padding:0; padding-left:180px; }
+
+#left,#right{ height:auto; margin-bottom:-10000px; padding-bottom:10000px; }
+
+#left{ display:inline; float:left; width:180px; margin-left:-180px; background: #0CF; }
+
+#right{ float:right; width:100%; background: #FC6; }

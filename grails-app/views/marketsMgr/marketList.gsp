@@ -42,7 +42,7 @@
         <input type="hidden" name="action" id="hidtype" />
     </form>
 </div>
-?<div id="dlg-buttons">
+<div id="dlg-buttons">
     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="save()" iconcls="icon-save">保存</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')"
        iconcls="icon-cancel">取消</a>

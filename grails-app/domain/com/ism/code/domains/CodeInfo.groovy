@@ -5,7 +5,6 @@ package com.ism.code.domains
  * 代码管理
  */
 class CodeInfo {
-    String codeId;//主键
     CodeSort codeSort;//分类
     String pCode;//父编码
     String codeName;//代码中文名称
@@ -15,4 +14,8 @@ class CodeInfo {
     static  mapping = {
         table('ism_codeInfo')
     }
+    static final Map validFalgMap = [
+            1: "有效",
+            0: "禁用"
+    ]
 }

@@ -43,6 +43,6 @@
         </div>
     </div>
 </div>
-<div data-options="region:'south',split:true" style="height:50px;">
-    版权归XXXXX所有
-</div>
+%{--<div data-options="region:'south',split:true" style="height:50px;">--}%
+    %{--版权归XXXXX所有--}%
+%{--</div>--}%
